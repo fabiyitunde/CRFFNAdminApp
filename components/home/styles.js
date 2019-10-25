@@ -4,11 +4,14 @@ import { Fonts, Metrics, Colors } from "../../Themes/";
 
 module.exports = StyleSheet.create({
   scrollView: {
-    backgroundColor: "#B99BC4"
+    // backgroundColor: "#B99BC4",
+
+    //marginBottom: Metrics.WIDTH * 0.5
+    padding: Metrics.WIDTH * 0.1
   },
   container: {
     flex: 1,
-    backgroundColor: "#C5B9C9"
+    backgroundColor: "#353735"
   },
   controlPanel: {
     flex: 1,
@@ -102,6 +105,6 @@ module.exports = StyleSheet.create({
   drawercontainer: {
     width: Metrics.WIDTH,
     height: Metrics.HEIGHT,
-    backgroundColor: "#2d324f"
+    backgroundColor: "#353735"
   }
 });

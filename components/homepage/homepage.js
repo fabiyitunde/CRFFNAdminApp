@@ -33,7 +33,18 @@ import { Fonts, Metrics, Colors } from "../../Themes/";
 import styles from "./styles";
 import Images from "../../Themes/Images";
 import Home from "../home/home";
+import Drawer from "react-native-drawer";
+import MyControlPanel from "./ControlPanel";
+import Invoicelist from "../invoicelist/invoicelist";
+import FilterMembers from "../filtermembers/filtermembers";
 import QRCodeScanner from "../qrcodescanner/qrcodescanner";
+const drawerStyles = {
+  drawer: {
+    shadowColor: "#000000",
+    shadowOpacity: 0.8,
+    shadowRadius: 0
+  }
+};
 /**
  *  Profile Screen
  */
@@ -41,7 +52,24 @@ export default class HomePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedTab: "Home"
+      selectedTab: "Home",
+      drawerType: "static",
+      openDrawerOffset: 50,
+      closedDrawerOffset: 0,
+      panOpenMask: 0.1,
+      relativeDrag: false,
+      panThreshold: 0.25,
+      tweenHandlerOn: false,
+      tweenDuration: 350,
+      tweenEasing: "linear",
+      disabled: false,
+      tweenHandlerPreset: null,
+      acceptDoubleTap: false,
+      acceptTap: false,
+      acceptPan: true,
+      tapToClose: true,
+      negotiatePan: false,
+      side: "left"
     };
   }
 
@@ -62,10 +90,10 @@ export default class HomePage extends Component {
         return <QRCodeScanner {...this.props} />;
         break;
       case "Invoices":
-        return <Home {...this.props} />;
+        return <Invoicelist {...this.props} />;
         break;
-      case "Payments":
-        return <Home {...this.props} />;
+      case "FilterMembers":
+        return <FilterMembers {...this.props} />;
         break;
       case "Profile":
         return <Home {...this.props} />;
@@ -84,6 +112,7 @@ export default class HomePage extends Component {
     return (
       <Container style={styles.main}>
         <Content>{this.renderSelectedTab()}</Content>
+
         <Footer>
           <FooterTab style={styles.footerTabBg}>
             <Button
@@ -116,9 +145,9 @@ export default class HomePage extends Component {
               onPress={() => this.setState({ selectedTab: "ScanCode" })}
             >
               {this.state.selectedTab == "ScanCode" ? (
-                <Image source={Images.activeCategory} style={styles.tabIcon} />
+                <Image source={Images.activeScan} style={styles.tabIcon} />
               ) : (
-                <Image source={Images.normalCategory} style={styles.tabIcon} />
+                <Image source={Images.normalScan} style={styles.tabIcon} />
               )}
               <Text
                 style={
@@ -141,14 +170,9 @@ export default class HomePage extends Component {
               onPress={() => this.setState({ selectedTab: "Invoices" })}
             >
               {this.state.selectedTab == "Invoices" ? (
-                <Ionicons
-                  name="ios-albums"
-                  size={24}
-                  color="#00bff3"
-                  style={{ justifyContent: "center" }}
-                />
+                <Image source={Images.activeInvoice} style={styles.tabIcon} />
               ) : (
-                <Ionicons name="ios-albums" size={24} color="#929292" />
+                <Image source={Images.normalInvoice} style={styles.tabIcon} />
               )}
               <Text
                 style={
@@ -162,16 +186,16 @@ export default class HomePage extends Component {
             </Button>
             <Button
               vertical
-              onPress={() => this.setState({ selectedTab: "Payments" })}
+              onPress={() => this.setState({ selectedTab: "FilterMembers" })}
             >
-              {this.state.selectedTab == "Payments" ? (
-                <Image source={Images.activeGift} style={styles.tabIcon} />
+              {this.state.selectedTab == "FilterMembers" ? (
+                <Image source={Images.activeMessage} style={styles.tabIcon} />
               ) : (
-                <Image source={Images.normalGift} style={styles.tabIcon} />
+                <Image source={Images.normalMessage} style={styles.tabIcon} />
               )}
               <Text
                 style={
-                  this.state.selectedTab == "Payments"
+                  this.state.selectedTab == "FilterMembers"
                     ? [
                         styles.activeTabText,
                         { marginTop: Metrics.WIDTH * 0.01 }
@@ -182,9 +206,10 @@ export default class HomePage extends Component {
                       ]
                 }
               >
-                Payments
+                Message
               </Text>
             </Button>
+            {/* 
             <Button
               vertical
               onPress={() => this.setState({ selectedTab: "Profile" })}
@@ -203,7 +228,7 @@ export default class HomePage extends Component {
               >
                 Profile
               </Text>
-            </Button>
+            </Button> */}
           </FooterTab>
         </Footer>
       </Container>

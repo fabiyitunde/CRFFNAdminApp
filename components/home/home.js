@@ -103,11 +103,9 @@ class Home extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.drawercontainer}>
-          <ScrollView>
-            <MembersList navigation={this.props.navigation} />
-          </ScrollView>
-        </View>
+        <ScrollView>
+          <MembersList navigation={this.props.navigation} />
+        </ScrollView>
       </View>
     );
   }

@@ -51,9 +51,9 @@ class Login extends Component {
 
   render() {
     const imageUri =
-      "https://antiqueruby.aliansoftware.net/Images/signin/image_bg_signin_five.jpg";
+      "http://aggregatesolution.com/wp-content/uploads/2019/10/login2-1.jpg";
     const imageMountifyLogo =
-      "https://antiqueruby.aliansoftware.net/Images/signin/ic_logo_mountify_signin_eight.png";
+      "http://aggregatesolution.com/wp-content/uploads/2019/10/loginlogo-1.png";
     return (
       <Container>
         <ImageBackground style={styles.imgContainer} source={{ uri: imageUri }}>

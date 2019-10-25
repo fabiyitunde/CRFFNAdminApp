@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
   },
 
   header: {
-    backgroundColor: "#0e1130",
+    backgroundColor: "#04920b",
     height: Metrics.HEIGHT * 0.1,
     borderBottomWidth: 0,
     ...Platform.select({
@@ -108,10 +108,25 @@ const styles = StyleSheet.create({
     paddingLeft: Metrics.WIDTH * 0.045,
     paddingRight: Metrics.WIDTH * 0.045
   },
+  secondRow: { marginTop: Metrics.HEIGHT * -0.218 },
+  infoRow: {
+    flexDirection: "row",
+    width: Metrics.WIDTH * 0.5
+  },
+  labelHeaderText: {
+    color: "#ffffff",
+    width: Metrics.WIDTH * 0.9,
+    fontSize: Fonts.moderateScale(18),
+    fontFamily: Fonts.type.helveticaNeueLight,
+    textAlign: "left",
+    fontWeight: "bold",
+    paddingLeft: Metrics.WIDTH * 0.05,
+    paddingTop: Metrics.WIDTH * 0.088
+  },
 
   labelText: {
     color: "#a3a3a3",
-    width: Metrics.WIDTH * 0.4,
+    width: Metrics.WIDTH * 0.2,
     fontSize: Fonts.moderateScale(16),
     fontFamily: Fonts.type.helveticaNeueLight,
     textAlign: "left"
@@ -157,7 +172,7 @@ const styles = StyleSheet.create({
   },
 
   editInfoText: {
-    color: "#0e1130",
+    color: "#04920b",
     fontSize: Fonts.moderateScale(16),
     fontFamily: Fonts.type.helveticaNeueLight
   },

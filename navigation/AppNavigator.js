@@ -6,6 +6,8 @@ import {
   createDrawerNavigator
 } from "react-navigation";
 import Home from "../components/home/home";
+import Invoicelist from "../components/invoicelist/invoicelist";
+import FilterMembers from "../components/filtermembers/filtermembers";
 import ControlPanel from "../components/home/ControlPanel";
 import Login from "../components/login/login";
 import AuthLoading from "../components/authloading";
@@ -15,6 +17,9 @@ import QRCodeScanner from "../components/qrcodescanner/qrcodescanner";
 import ScannedInvoiceDetails from "../components/scannedinvoicedetails/scannedinvoicedetails";
 import ScannedIDDetails from "../components/scannediddetails/scannediddetails";
 import HomePage from "../components/homepage/homepage";
+import InvoiceItem from "../components/invoiceitem/invoiceitem";
+import MemberItem from "../components/memberitem/memberitem";
+import SelectedMembersList from "../components/selectedmemberslist/selectedmemberslist";
 
 const DrawerStack = createDrawerNavigator(
   {
@@ -30,12 +35,18 @@ const AppStack = createStackNavigator(
   {
     HomePage: HomePage,
     MemberDetails: MemberDetails,
+    MemberItem: MemberItem,
     InvoiceDetails: InvoiceDetails,
     ScannedInvoiceDetails: ScannedInvoiceDetails,
     ScannedIDDetails: ScannedIDDetails,
     Home: Home,
-    QRCodeScanner: QRCodeScanner
+    QRCodeScanner: QRCodeScanner,
+    Invoicelist: Invoicelist,
+    InvoiceItem: InvoiceItem,
+    FilterMembers: FilterMembers,
+    SelectedMembersList: SelectedMembersList
   },
+  // {navigationOptions:{headerRight:(<SelectedMemberIcon/>)}},
   {
     headerMode: "none",
     navigationOptions: ({ navigation }) => ({

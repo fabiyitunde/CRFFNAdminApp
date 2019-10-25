@@ -11,7 +11,8 @@ import {
   ListView,
   TextInput,
   BackHandler,
-  I18nManager
+  I18nManager,
+  ScrollView
 } from "react-native";
 import {
   Container,
@@ -81,6 +82,7 @@ class MembersList extends Component {
       this.setState({ filtereddata: data });
       return;
     }
+
     var filteredlist = linq
       .from(data)
       .where(
@@ -116,7 +118,7 @@ class MembersList extends Component {
     if (this.state.isprocessing == true || !this.state.data)
       return <ActivityIndicator size="large" color="#0000ff" />;
     return (
-      <View>
+      <ScrollView>
         <View androidStatusBarColor={"#0e1130"} style={styles.header}>
           <SearchBar
             style={styles.searcbarstyle}
@@ -128,6 +130,7 @@ class MembersList extends Component {
             value={this.state.searchtext}
           />
         </View>
+
         <View
           style={styles.listMainView}
           animation="zoomInDown"
@@ -136,6 +139,7 @@ class MembersList extends Component {
         >
           {this.state.filtereddata.map((serveritem, index) => {
             const item = this.transformDataForDisplay(serveritem);
+
             return (
               <View style={styles.rowBg} key={index}>
                 <View style={styles.rowView}>
@@ -167,7 +171,7 @@ class MembersList extends Component {
             );
           })}
         </View>
-      </View>
+      </ScrollView>
     );
   }
   _fnChangeItem(listId) {

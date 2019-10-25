@@ -5,7 +5,7 @@ import { Fonts, Metrics, Colors } from "../../Themes/";
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: "#2d324f",
+    backgroundColor: "#181818",
     height: Metrics.HEIGHT * 0.1,
     borderBottomWidth: 0,
     paddingTop: Metrics.HEIGHT * 0.03,
@@ -56,10 +56,19 @@ const styles = StyleSheet.create({
   rowBg: {
     width: Metrics.WIDTH,
     backgroundColor: Colors.snow,
-    marginLeft: Metrics.WIDTH * 0.045,
-    marginTop: Metrics.HEIGHT * 0.015
+    paddingLeft: Metrics.WIDTH * 0.025,
+    paddingTop: Metrics.WIDTH * 0.028,
+    marginTop: Metrics.HEIGHT * 0.004
   },
-
+  listcontainer: {
+    paddingBottom: Metrics.WIDTH * 0.5,
+    marginBottom: Metrics.WIDTH * 0.5
+  },
+  block: {
+    height: Metrics.WIDTH * 0.5,
+    paddingBottom: Metrics.WIDTH * 0.5,
+    marginBottom: Metrics.WIDTH * 0.5
+  },
   profileImg: {
     width: Metrics.WIDTH * 0.12,
     height: Metrics.WIDTH * 0.12,
@@ -102,9 +111,13 @@ const styles = StyleSheet.create({
     width: Metrics.WIDTH * 0.18,
     height: Metrics.HEIGHT * 0.035,
     borderRadius: Metrics.HEIGHT * 0.045,
-    backgroundColor: "#0691ce",
+    backgroundColor: "#00aa08",
     marginRight: Metrics.WIDTH * 0.03,
-    justifyContent: "center"
+    justifyContent: "center",
+    shadowColor: "#2AC062",
+    shadowOpacity: 0.4,
+    shadowOffset: { height: 10, width: 0 },
+    shadowRadius: 20
   },
 
   followTxtSelected: {

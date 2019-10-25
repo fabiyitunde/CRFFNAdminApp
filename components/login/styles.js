@@ -44,14 +44,14 @@ const styles = StyleSheet.create({
   },
   logoSec: {
     width: Metrics.WIDTH,
-    height: Metrics.HEIGHT * 0.24,
+    height: Metrics.HEIGHT * 0.26,
     justifyContent: "center",
     alignItems: "center"
   },
   imageLogoMountify: {
     alignSelf: "center",
     width: Metrics.WIDTH * 0.25,
-    height: Metrics.WIDTH * 0.2
+    height: Metrics.WIDTH * 0.22
   },
   textInput: {
     backgroundColor: "#fff",

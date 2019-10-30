@@ -9,6 +9,7 @@ import {
   BackHandler,
   I18nManager,
   AsyncStorage,
+  ImageBackground,
   ScrollView
 } from "react-native";
 import {
@@ -65,7 +66,7 @@ class InvoiceItem extends Component {
   render() {
     StatusBar.setBarStyle("light-content", true);
     if (Platform.OS === "android") {
-      StatusBar.setBackgroundColor("#0e1130", true);
+      StatusBar.setBackgroundColor("#0c0811", true);
       StatusBar.setTranslucent(true);
     }
     const { invoicelist } = this.props;
@@ -83,7 +84,7 @@ class InvoiceItem extends Component {
 
     return (
       <Container style={styles.container}>
-        <Header androidStatusBarColor={"#0e1130"} style={styles.header}>
+        <Header androidStatusBarColor={"#0c0811"} style={styles.header}>
           <Left style={styles.left}>
             <TouchableOpacity
               style={styles.backArrow}
@@ -105,145 +106,162 @@ class InvoiceItem extends Component {
         <ScrollableTabView
           initialPage={0}
           tabBarUnderlineStyle={styles.tabUnderLine}
-          tabBarBackgroundColor={"#383d5a"}
+          tabBarBackgroundColor={"#0c0811"}
           tabBarActiveTextColor={"white"}
           tabBarInactiveTextColor={"rgba(255,255,255,0.4)"}
+          tabBarUnderlineStyle={{ backgroundColor: "#ffffff" }}
           tabBarTextStyle={styles.tabText}
           renderTabBar={() => <ScrollableTabBar />}
         >
           <View tabLabel="Details">
             <View style={styles.mainView}>
               <ScrollView>
-                <View>
-                  <Text style={styles.itemHeader}>Invoice Header</Text>
+                <ImageBackground
+                  source={Images.invoiceHeader}
+                  style={styles.ImageBG}
+                >
+                  <View>
+                    <Text style={styles.itemHeader2}>Invoice Header</Text>
+                  </View>
+                  <View style={styles.dividerHorizontal} />
+                  <View style={styles.mainRow}>
+                    <Text style={styles.labelText}>Name</Text>
+                    <Text style={[styles.infoText, { color: "#ffffff" }]}>
+                      {invoiceheader.payername}
+                    </Text>
+                  </View>
+                  <View style={styles.dividerHorizontal} />
+                  <View style={styles.mainRow}>
+                    <Text style={styles.labelText}>Category</Text>
+                    <Text style={[styles.infoText, { color: "#ffffff" }]}>
+                      {invoiceheader.category}
+                    </Text>
+                  </View>
+                  <View style={styles.dividerHorizontal} />
+                  <View style={styles.mainRow}>
+                    <Text style={styles.labelText}>Narration</Text>
+                    <Text style={[styles.infoText, { color: "#ffffff" }]}>
+                      {invoiceheader.narration}
+                    </Text>
+                  </View>
+                </ImageBackground>
+                <View style={styles.card}>
+                  <View style={styles.dividerHorizontal} />
+                  <View style={styles.mainRow}>
+                    <Text style={styles.labelText}>Total Invoice Amount</Text>
+                    <Text style={[styles.infoText, { color: "#0e1130" }]}>
+                      {invoiceheader.totalinvoiceamount}
+                    </Text>
+                  </View>
+                  <View style={styles.dividerHorizontal} />
+                  <View style={styles.mainRow}>
+                    <Text style={styles.labelText}>Status</Text>
+                    <Text style={[styles.infoText, { color: "#ff0000" }]}>
+                      {invoiceheader.status}
+                    </Text>
+                  </View>
+                  <View style={styles.dividerHorizontal} />
+                  <View style={styles.mainRow}>
+                    <Text style={styles.labelText}>Ref Date</Text>
+                    <Text style={[styles.infoText, { color: "#0e1130" }]}>
+                      {invoiceheader.refdate}
+                    </Text>
+                  </View>
                 </View>
-                <View style={styles.dividerHorizontal} />
-                <View style={styles.mainRow}>
-                  <Text style={styles.labelText}>Name</Text>
-                  <Text style={[styles.infoText, { color: "#0e1130" }]}>
-                    {invoiceheader.payername}
-                  </Text>
+                <View style={styles.card}>
+                  <View>
+                    <Text style={styles.itemHeader}>Line Items</Text>
+                  </View>
+                  <View style={styles.dividerHorizontal} />
+                  <View>
+                    {lineitems.map((item, key) => (
+                      <View key={key}>
+                        <View style={styles.mainRow}>
+                          <Text style={styles.labelText}>Unit Amout</Text>
+                          <Text style={[styles.infoText, { color: "#0e1130" }]}>
+                            {item.unitamount}
+                          </Text>
+                        </View>
+                        <View style={styles.mainRow}>
+                          <Text style={styles.labelText}>Quantity</Text>
+                          <Text style={[styles.infoText, { color: "#0e1130" }]}>
+                            {item.quantity}
+                          </Text>
+                        </View>
+                        <View style={styles.mainRow}>
+                          <Text style={styles.labelText}>Amount</Text>
+                          <Text style={[styles.infoText, { color: "#0e1130" }]}>
+                            {item.amount}
+                          </Text>
+                        </View>
+                        <View style={styles.mainRow}>
+                          <Text style={styles.labelText}>Narration</Text>
+                          <Text style={[styles.infoText, { color: "#0e1130" }]}>
+                            {item.narration}
+                          </Text>
+                        </View>
+                        <View style={styles.mainRow}>
+                          <Text style={styles.labelText}>Category</Text>
+                          <Text style={[styles.infoText, { color: "#0e1130" }]}>
+                            {item.category}
+                          </Text>
+                        </View>
+                      </View>
+                    ))}
+                  </View>
                 </View>
-                <View style={styles.dividerHorizontal} />
-                <View style={styles.mainRow}>
-                  <Text style={styles.labelText}>Category</Text>
-                  <Text style={[styles.infoText, { color: "#0e1130" }]}>
-                    {invoiceheader.category}
-                  </Text>
-                </View>
-                <View style={styles.dividerHorizontal} />
-                <View style={styles.mainRow}>
-                  <Text style={styles.labelText}>Narration</Text>
-                  <Text style={[styles.infoText, { color: "#0e1130" }]}>
-                    {invoiceheader.narration}
-                  </Text>
-                </View>
-                <View style={styles.dividerHorizontal} />
-                <View style={styles.mainRow}>
-                  <Text style={styles.labelText}>Total Invoice Amount</Text>
-                  <Text style={[styles.infoText, { color: "#0e1130" }]}>
-                    {invoiceheader.totalinvoiceamount}
-                  </Text>
-                </View>
-                <View style={styles.dividerHorizontal} />
-                <View style={styles.mainRow}>
-                  <Text style={styles.labelText}>Status</Text>
-                  <Text style={[styles.infoText, { color: "#0e1130" }]}>
-                    {invoiceheader.status}
-                  </Text>
-                </View>
-                <View style={styles.dividerHorizontal} />
-                <View style={styles.mainRow}>
-                  <Text style={styles.labelText}>Ref Date</Text>
-                  <Text style={[styles.infoText, { color: "#0e1130" }]}>
-                    {invoiceheader.refdate}
-                  </Text>
-                </View>
-
-                <View>
-                  <Text style={styles.itemHeader}>Line Items</Text>
-                </View>
-                <View style={styles.dividerHorizontal} />
-                <View>
-                  {lineitems.map((item, key) => (
-                    <View key={key}>
-                      <View style={styles.mainRow}>
-                        <Text style={styles.labelText}>Unit Amout</Text>
-                        <Text style={[styles.infoText, { color: "#0e1130" }]}>
-                          {item.unitamount}
-                        </Text>
+                <View style={styles.card}>
+                  <View style={styles.dividerHorizontal} />
+                  <View>
+                    <Text style={styles.itemHeader}>Payment Details</Text>
+                  </View>
+                  <View style={styles.dividerHorizontal} />
+                  <View>
+                    {paymentrequestlist.map((item, key) => (
+                      <View key={key}>
+                        <View style={styles.mainRow}>
+                          <Text style={styles.labelText}>Charges</Text>
+                          <Text style={[styles.infoText, { color: "#0e1130" }]}>
+                            {item.charges}
+                          </Text>
+                        </View>
+                        <View style={styles.mainRow}>
+                          <Text style={styles.labelText}>Payment Gateway</Text>
+                          <Text style={[styles.infoText, { color: "#0e1130" }]}>
+                            {item.paymentgateway}
+                          </Text>
+                        </View>
+                        <View style={styles.mainRow}>
+                          <Text style={styles.labelText}>Status</Text>
+                          <Text style={[styles.infoText, { color: "#0e1130" }]}>
+                            {item.status}
+                          </Text>
+                        </View>
+                        <View style={styles.mainRow}>
+                          <Text style={styles.labelText}>Transaction Date</Text>
+                          <Text style={[styles.infoText, { color: "#0e1130" }]}>
+                            {item.transdate}
+                          </Text>
+                        </View>
+                        <View style={styles.mainRow}>
+                          <Text style={styles.labelText}>
+                            Transaction Reference
+                          </Text>
+                          <Text style={[styles.infoText, { color: "#0e1130" }]}>
+                            {item.transref}
+                          </Text>
+                        </View><View style={styles.mainRow}>
+                          <Text style={{color:white}}>
+                            end
+                          </Text>
+                          <Text style={[styles.infoText, { color: "#ffffff" }]}>
+                            {item.transref}
+                          </Text>
+                        </View>
+                        <View style={styles.dividerHorizontal} />
                       </View>
-                      <View style={styles.mainRow}>
-                        <Text style={styles.labelText}>Quantity</Text>
-                        <Text style={[styles.infoText, { color: "#0e1130" }]}>
-                          {item.quantity}
-                        </Text>
-                      </View>
-                      <View style={styles.mainRow}>
-                        <Text style={styles.labelText}>Amount</Text>
-                        <Text style={[styles.infoText, { color: "#0e1130" }]}>
-                          {item.amount}
-                        </Text>
-                      </View>
-                      <View style={styles.mainRow}>
-                        <Text style={styles.labelText}>Narration</Text>
-                        <Text style={[styles.infoText, { color: "#0e1130" }]}>
-                          {item.narration}
-                        </Text>
-                      </View>
-                      <View style={styles.mainRow}>
-                        <Text style={styles.labelText}>Category</Text>
-                        <Text style={[styles.infoText, { color: "#0e1130" }]}>
-                          {item.category}
-                        </Text>
-                      </View>
-                      <View style={styles.dividerHorizontal} />
-                    </View>
-                  ))}
-                </View>
-                <View>
-                  <Text style={styles.itemHeader}>Payment Details</Text>
-                </View>
-                <View style={styles.dividerHorizontal} />
-
-                <View>
-                  {paymentrequestlist.map((item, key) => (
-                    <View key={key}>
-                      <View style={styles.mainRow}>
-                        <Text style={styles.labelText}>Charges</Text>
-                        <Text style={[styles.infoText, { color: "#0e1130" }]}>
-                          {item.charges}
-                        </Text>
-                      </View>
-                      <View style={styles.mainRow}>
-                        <Text style={styles.labelText}>Payment Gateway</Text>
-                        <Text style={[styles.infoText, { color: "#0e1130" }]}>
-                          {item.paymentgateway}
-                        </Text>
-                      </View>
-                      <View style={styles.mainRow}>
-                        <Text style={styles.labelText}>Status</Text>
-                        <Text style={[styles.infoText, { color: "#0e1130" }]}>
-                          {item.status}
-                        </Text>
-                      </View>
-                      <View style={styles.mainRow}>
-                        <Text style={styles.labelText}>Transaction Date</Text>
-                        <Text style={[styles.infoText, { color: "#0e1130" }]}>
-                          {item.transdate}
-                        </Text>
-                      </View>
-                      <View style={styles.mainRow}>
-                        <Text style={styles.labelText}>
-                          Transaction Reference
-                        </Text>
-                        <Text style={[styles.infoText, { color: "#0e1130" }]}>
-                          {item.transref}
-                        </Text>
-                      </View>
-                      <View style={styles.dividerHorizontal} />
-                    </View>
-                  ))}
+                    ))}
+                  </View>
                 </View>
               </ScrollView>
             </View>

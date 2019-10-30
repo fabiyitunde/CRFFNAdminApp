@@ -15,12 +15,13 @@ export const removeItemFromProps = selectedmember => dispatch => {
 export const filterCriteria = data => dispatch => {
   const axios = getaxious();
   getauthorizationheaderconfig().then(headers => {
-    console.log(headers);
-    const url = "api/enforcementApp/processSearch";
+    const url = `api/enforcementApp/processSearch`;
     const body = data;
+    console.log(headers);
+    console.log(body);
 
     axios
-      .post(url, { headers }, body)
+      .post(url, headers, body)
       .then(response => {
         console.log("My Response", response);
       })

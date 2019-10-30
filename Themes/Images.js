@@ -10,6 +10,7 @@ const images = {
   activeInvoice: require("../Images/activeInvoice.png"),
   normalInvoice: require("../Images/normalInvoice.png"),
   dots: require("../Images/activess.png"),
+  invoiceHeader: require("../Images/invoiceHeader.png"),
   addUserIcon: require("../Images/addUserIcon.png"),
   artical_fab: require("../Images/artical_fab.png"),
   backArrow: require("../Images/backArrow.png"),

@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
   },
 
   header: {
-    backgroundColor: "#0e1130",
+    backgroundColor: "#0c0811",
     height: Metrics.HEIGHT * 0.1,
     borderBottomWidth: 0,
     ...Platform.select({
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
   heartBg: {
     width: Metrics.WIDTH * 0.054,
     height: Metrics.WIDTH * 0.054,
-    borderRadius: Metrics.WIDTH * 0.027,
+    borderRadius: Metrics.WIDTH * 0.02,
     backgroundColor: "transparent",
     borderWidth: 1,
     borderColor: Colors.snow,
@@ -96,9 +96,16 @@ const styles = StyleSheet.create({
     color: Colors.snow,
     alignSelf: "center"
   },
-
+  card: {
+    backgroundColor: "#ffffff",
+    borderRadius: Metrics.WIDTH * 0.057,
+    marginLeft: Metrics.WIDTH * 0.012,
+    marginRight: Metrics.WIDTH * 0.012,
+    marginTop: Metrics.WIDTH * 0.015
+  },
   mainView: {
-    height: Metrics.HEIGHT * 0.9
+    height: Metrics.HEIGHT * 0.9,
+    backgroundColor: "#d9d9d9"
   },
 
   mainRow: {
@@ -108,10 +115,17 @@ const styles = StyleSheet.create({
     paddingLeft: Metrics.WIDTH * 0.045,
     paddingRight: Metrics.WIDTH * 0.045
   },
-
+  ImageBG: { alignSelf: "center", width: Metrics.WIDTH },
   itemHeader: {
     alignSelf: "center",
     fontWeight: "bold",
+    paddingTop: Metrics.HEIGHT * 0.018,
+    paddingBottom: Metrics.HEIGHT * 0.025
+  },
+  itemHeader2: {
+    alignSelf: "center",
+    fontWeight: "bold",
+    color: Colors.snow,
     paddingTop: Metrics.HEIGHT * 0.018,
     paddingBottom: Metrics.HEIGHT * 0.025
   },

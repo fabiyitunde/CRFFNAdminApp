@@ -1,4 +1,5 @@
 export const LOGIN = "LOGIN";
+export const LOGOUT = "LOGOUT";
 export const LOAD_MEMBERS = "LOAD_MEMBERS";
 export const LOAD_MEMBER_DETAIL = "LOAD_MEMBER_DETAIL";
 export const LOAD_MEMBERS_INVOICES = "LOAD_MEMBERS_INVOICES";

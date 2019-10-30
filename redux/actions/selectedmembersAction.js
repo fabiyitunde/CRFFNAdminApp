@@ -20,11 +20,12 @@ export const filterCriteria = data => dispatch => {
     const body = data;
 
     axios
-      .post(url, { headers }, body)
+      .post(url, body, { headers })
       .then(response => {
         console.log("My Response", response);
       })
       .catch(error => {
+        console.log(`Filter error -- ${error}`);
         console.log(`this is the error --- ${error}`);
       });
   });

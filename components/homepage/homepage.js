@@ -38,6 +38,7 @@ import MyControlPanel from "./ControlPanel";
 import Invoicelist from "../invoicelist/invoicelist";
 import FilterMembers from "../filtermembers/filtermembers";
 import QRCodeScanner from "../qrcodescanner/qrcodescanner";
+import Logout from "../logout/logout";
 const drawerStyles = {
   drawer: {
     shadowColor: "#000000",
@@ -97,6 +98,9 @@ export default class HomePage extends Component {
         break;
       case "Profile":
         return <Home {...this.props} />;
+        break;
+      case "Logout":
+        return <Logout {...this.props} />;
         break;
       default:
     }
@@ -207,6 +211,32 @@ export default class HomePage extends Component {
                 }
               >
                 Message
+              </Text>
+            </Button>
+            
+            <Button
+              vertical
+              onPress={() => this.setState({ selectedTab: "Logout" })}
+            >
+              {this.state.selectedTab == "Logout" ? (
+                <Image source={Images.logoutIcon} style={styles.tabIcon} />
+              ) : (
+                <Image source={Images.logoutIcon} style={styles.tabIcon} />
+              )}
+              <Text
+                style={
+                  this.state.selectedTab == "Logout"
+                    ? [
+                        styles.activeTabText,
+                        { marginTop: Metrics.WIDTH * 0.01 }
+                      ]
+                    : [
+                        styles.normalTabText,
+                        { marginTop: Metrics.WIDTH * 0.01 }
+                      ]
+                }
+              >
+                Logout
               </Text>
             </Button>
             {/* 

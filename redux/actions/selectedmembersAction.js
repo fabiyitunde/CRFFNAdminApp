@@ -21,11 +21,16 @@ export const filterCriteria = data => dispatch => {
     console.log(body);
 
     axios
+<<<<<<< HEAD
       .post(url, headers, body)
+=======
+      .post(url, body, { headers })
+>>>>>>> 3dfece9b8b611375af026739098368be6dbda8ce
       .then(response => {
         console.log("My Response", response);
       })
       .catch(error => {
+        console.log(`Filter error -- ${error}`);
         console.log(`this is the error --- ${error}`);
       });
   });

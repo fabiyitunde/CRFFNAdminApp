@@ -1,4 +1,4 @@
-import { LOGIN } from "../actionTypes";
+import { LOGIN, LOGOUT } from "../actionTypes";
 
 const initialState = {
   logininfo: {}
@@ -10,6 +10,10 @@ export default function(state = initialState, action) {
       return {
         ...state,
         logininfo: action.logininfo
+      };
+    case LOGOUT:
+      return {
+        ...state
       };
 
     default:

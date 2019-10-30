@@ -1,5 +1,5 @@
 import * as firebase from "firebase";
-import { LOGIN } from "../actionTypes";
+import { LOGIN, LOGOUT } from "../actionTypes";
 import { getaxious } from "../../services/axiosService";
 import {
   ActivityIndicator,
@@ -60,6 +60,14 @@ export const loadloginuserInfo = () => dispatch => {
   })();
 };
 
+export const logoutuser = (successcallback) => dispatch => {
+  (async () => {
+    await AsyncStorage.setItem("userToken", "");
+  })();
+  dispatch({ type: LOGOUT });
+  successcallback();
+  console.log("Signed Out Successfull");
+};
 encodeParams = params => {
   let body = "";
   for (let key in params) {

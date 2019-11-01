@@ -37,7 +37,7 @@ class Logout extends Component {
     this.props.logoutuser(() => {
       this.props.navigation.navigate("Login");
     });
-  }
+  };
   componentWillMount() {
     var that = this;
     BackHandler.addEventListener("hardwareBackPress", function() {
@@ -81,9 +81,7 @@ class Logout extends Component {
               />
             </View>
 
-            <Text
-              style={styles.textForgotPsssword}
-            >
+            <Text style={styles.textForgotPsssword}>
               Are you sure you want to signout?
             </Text>
 

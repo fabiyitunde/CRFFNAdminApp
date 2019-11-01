@@ -243,7 +243,7 @@ const styles = StyleSheet.create({
   buttondialogsignup: {
     backgroundColor: Colors.loginGreen,
     alignSelf: "center",
-    marginTop: Metrics.HEIGHT * 0.12,
+    //marginTop: Metrics.HEIGHT * -,
     borderRadius: 40,
     width: Metrics.WIDTH * 0.65,
     height: Metrics.HEIGHT * 0.07,
@@ -314,6 +314,8 @@ const styles = StyleSheet.create({
   },
 
   rowBg: {
+    borderTopColor: "#000000",
+    borderTopWidth: Metrics.WIDTH * 0.003,
     width: Metrics.WIDTH,
     backgroundColor: Colors.snow,
     paddingLeft: Metrics.WIDTH * 0.025,
@@ -401,6 +403,7 @@ const styles = StyleSheet.create({
 
   rowView: {
     flexDirection: "row",
+    borderBottomColor: "#e3e3e3",
     marginBottom: Metrics.HEIGHT * 0.015
   },
 

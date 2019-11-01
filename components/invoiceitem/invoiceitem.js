@@ -250,12 +250,11 @@ class InvoiceItem extends Component {
                           <Text style={[styles.infoText, { color: "#0e1130" }]}>
                             {item.transref}
                           </Text>
-                        </View><View style={styles.mainRow}>
-                          <Text style={{color:white}}>
-                            end
-                          </Text>
+                        </View>
+                        <View style={styles.mainRow}>
+                          <Text style={{ color: "#ffffff" }}>end</Text>
                           <Text style={[styles.infoText, { color: "#ffffff" }]}>
-                            {item.transref}
+                            end
                           </Text>
                         </View>
                         <View style={styles.dividerHorizontal} />

@@ -17,23 +17,20 @@ export const filterCriteria = data => dispatch => {
   getauthorizationheaderconfig().then(headers => {
     const url = `api/enforcementApp/processSearch`;
     const body = data;
-    console.log(headers);
     console.log(body);
-
     axios
-<<<<<<< HEAD
-      .post(url, headers, body)
-=======
       .post(url, body, { headers })
->>>>>>> 3dfece9b8b611375af026739098368be6dbda8ce
       .then(response => {
-        console.log("My Response", response);
+        var responselist = [];
+
+        response.data.forEach(function(element) {
+          responselist.push(element);
+        });
+        //  console.log(`this is the response --- ${responseDecoded}`);
+        dispatch({ type: FILTER_RESULT, filteredlist: responselist });
       })
       .catch(error => {
-        console.log(`Filter error -- ${error}`);
         console.log(`this is the error --- ${error}`);
       });
   });
-
-  dispatch({ type: FILTER_RESULT, filteredlist: data });
 };

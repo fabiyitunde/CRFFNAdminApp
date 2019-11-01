@@ -97,17 +97,21 @@ class FilterMembers extends Component {
     } = this.state;
     item.name = name;
     item.category = parseInt(category, 10);
-    item.gsmnumber = parseInt("00009877");
+    item.gsmnumber = gsmnumber;
     item.email = email;
     item.pagesize = pagesize;
     item.pagenumber = pagenumber;
     item.crffnNumber = crffnNumber;
 
     this.props.filterCriteria(item);
+    this.setState({
+      filtereddata: this.props.filteredlist
+    });
+
+    // console.log(this.props.filteredlist);
   }
-  handleOnAdd() {
-    console.log("j");
-    console.log("ju");
+  handleOnAdd(item) {
+    this.props.mapDispatchToProps(item);
   }
 
   _handleBagNavigation() {
@@ -124,8 +128,7 @@ class FilterMembers extends Component {
     this.props.loadMembersList(() => {
       this.setState({
         isprocessing: false,
-        data: this.props.memberslist,
-        filtereddata: this.props.memberslist
+        data: this.props.memberslist
       });
     });
   }
@@ -162,12 +165,12 @@ class FilterMembers extends Component {
   transformDataForDisplay = serverdata => {
     const returndata = {
       id: Number(serverdata.Id),
-      profileImage: serverdata.picturestring,
-      name: `${serverdata.CustomerName} - [${serverdata.MembershipNumber}] `,
-      post: serverdata.FreightForwaderCategoryDescr,
+      profileImage: serverdata.picture,
+      name: `${serverdata.name} - [${serverdata.crffnMasterid}] `,
+      post: serverdata.category,
       isSelected: false
     };
-
+    console.log(returndata);
     return returndata;
   };
   render() {
@@ -188,7 +191,7 @@ class FilterMembers extends Component {
           </Body>
           <Right style={styles.right}>
             <TouchableOpacity
-              onPress={() => this.props.navigation.navigate("Drawer")}
+              onPress={() => this.viewSelectedMembers()}
               style={styles.backArrow}
             >
               <Text
@@ -224,6 +227,11 @@ class FilterMembers extends Component {
                     this.setState({ category: category })
                   }
                 >
+                  <Picker.Item
+                    style={{ color: "#e3e3e3" }}
+                    label="--Select Category--"
+                    value=""
+                  />
                   <Picker.Item label="Individual" value="1" />
                   <Picker.Item label="Company" value="2" />
                 </Picker>
@@ -269,6 +277,49 @@ class FilterMembers extends Component {
               Search
             </Text>
           </TouchableOpacity>
+          <View>
+            <ScrollView>
+              {
+                (console.log("hi" + this.state.filtereddata),
+                this.state.filtereddata.length !== 0 ||
+                this.props.filteredlist !== undefined ||
+                this.props.filteredlist !== null
+                  ? this.state.filtereddata.map((item, index) => {
+                      return (
+                        <View style={styles.rowBg} key={index}>
+                          <View style={styles.rowView}>
+                            <Image
+                              source={{ uri: item.picture }}
+                              style={styles.profileImg}
+                            />
+                            <View style={styles.namePostView}>
+                              <Text style={styles.rowNameTxt}>{item.name}</Text>
+                            </View>
+                            <View style={{ justifyContent: "center" }}>
+                              <TouchableOpacity
+                                style={styles.followBgSelected}
+                                onPress={() => this.handleOnAdd(item)}
+                              >
+                                <Text style={styles.followTxtSelected}>
+                                  Add
+                                </Text>
+                              </TouchableOpacity>
+                            </View>
+                          </View>
+                          <View
+                            style={
+                              index === this.state.data.length - 1
+                                ? null
+                                : styles.dividerHorizontal
+                            }
+                          />
+                        </View>
+                      );
+                    })
+                  : null)
+              }
+            </ScrollView>
+          </View>
         </View>
       </Container>
     );
@@ -278,7 +329,7 @@ function mapStateToProps(state, props) {
   return {
     memberslist: state.members.memberslist,
     selectedmembers: state.selectedmembers.selectedmemberslist,
-    selectedmembers: state.selectedmembers.filteredlist
+    filteredlist: state.selectedmembers.filteredlist
   };
 }
 

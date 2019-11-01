@@ -44,7 +44,8 @@ const AppStack = createStackNavigator(
     Invoicelist: Invoicelist,
     InvoiceItem: InvoiceItem,
     FilterMembers: FilterMembers,
-    SelectedMembersList: SelectedMembersList
+    SelectedMembersList: SelectedMembersList,
+    Login: Login
   },
   // {navigationOptions:{headerRight:(<SelectedMemberIcon/>)}},
   {

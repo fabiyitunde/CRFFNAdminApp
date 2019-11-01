@@ -279,45 +279,40 @@ class FilterMembers extends Component {
           </TouchableOpacity>
           <View>
             <ScrollView>
-              {
-                (console.log("hi" + this.state.filtereddata),
-                this.state.filtereddata.length !== 0 ||
-                this.props.filteredlist !== undefined ||
-                this.props.filteredlist !== null
-                  ? this.state.filtereddata.map((item, index) => {
-                      return (
-                        <View style={styles.rowBg} key={index}>
-                          <View style={styles.rowView}>
-                            <Image
-                              source={{ uri: item.picture }}
-                              style={styles.profileImg}
-                            />
-                            <View style={styles.namePostView}>
-                              <Text style={styles.rowNameTxt}>{item.name}</Text>
-                            </View>
-                            <View style={{ justifyContent: "center" }}>
-                              <TouchableOpacity
-                                style={styles.followBgSelected}
-                                onPress={() => this.handleOnAdd(item)}
-                              >
-                                <Text style={styles.followTxtSelected}>
-                                  Add
-                                </Text>
-                              </TouchableOpacity>
-                            </View>
-                          </View>
-                          <View
-                            style={
-                              index === this.state.data.length - 1
-                                ? null
-                                : styles.dividerHorizontal
-                            }
+              {this.state.filtereddata.length !== 0 ||
+              this.props.filteredlist !== undefined ||
+              this.props.filteredlist !== null
+                ? this.props.filteredlist.map((item, index) => {
+                    return (
+                      <View style={styles.rowBg} key={index}>
+                        <View style={styles.rowView}>
+                          <Image
+                            source={{ uri: item.picture }}
+                            style={styles.profileImg}
                           />
+                          <View style={styles.namePostView}>
+                            <Text style={styles.rowNameTxt}>{item.name}</Text>
+                          </View>
+                          <View style={{ justifyContent: "center" }}>
+                            <TouchableOpacity
+                              style={styles.followBgSelected}
+                              onPress={() => this.handleOnAdd(item)}
+                            >
+                              <Text style={styles.followTxtSelected}>Add</Text>
+                            </TouchableOpacity>
+                          </View>
                         </View>
-                      );
-                    })
-                  : null)
-              }
+                        <View
+                          style={
+                            index === this.state.data.length - 1
+                              ? null
+                              : styles.dividerHorizontal
+                          }
+                        />
+                      </View>
+                    );
+                  })
+                : null}
             </ScrollView>
           </View>
         </View>

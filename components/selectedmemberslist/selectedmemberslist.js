@@ -63,6 +63,9 @@ class SelectedMembersList extends Component {
   onBackClick() {
     this.props.navigation.navigate("HomePage");
   }
+  sendMessage() {
+    this.props.navigation.navigate("MessageHome");
+  }
   componentDidMount() {
     this.selectedmembers;
     this.data = this.props.selectedmembers;
@@ -130,6 +133,15 @@ class SelectedMembersList extends Component {
             >
               {this.props.selectedmembers.length > 0 ? (
                 <View>
+                  <TouchableOpacity
+                    info
+                    style={styles.buttondialogsignup}
+                    onPress={() => this.sendMessage()}
+                  >
+                    <Text autoCapitalize="words" style={styles.buttonsignin}>
+                      Send Message
+                    </Text>
+                  </TouchableOpacity>
                   {this.props.selectedmembers.map((item, index) => {
                     // const item = this.transformDataForDisplay(serveritem);
                     // console.log(item);

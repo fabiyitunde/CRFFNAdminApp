@@ -166,6 +166,21 @@ const styles = StyleSheet.create({
     marginLeft: Metrics.WIDTH * 0.03,
     marginBottom: Metrics.HEIGHT * 0.01
   },
+  buttondialogsignup: {
+    backgroundColor: Colors.loginGreen,
+    alignSelf: "center",
+    //marginTop: Metrics.HEIGHT * -,
+    borderRadius: 40,
+    width: Metrics.WIDTH * 0.65,
+    height: Metrics.HEIGHT * 0.07,
+    justifyContent: "center"
+  },
+  buttonsignin: {
+    alignSelf: "center",
+    fontSize: 15,
+    fontFamily: Fonts.type.SFUIDisplaySemibold,
+    color: "white"
+  },
   searcbarstyle: {
     color: "#a3a3a3",
     width: Metrics.WIDTH * 0.9,

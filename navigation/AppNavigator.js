@@ -20,6 +20,7 @@ import HomePage from "../components/homepage/homepage";
 import InvoiceItem from "../components/invoiceitem/invoiceitem";
 import MemberItem from "../components/memberitem/memberitem";
 import SelectedMembersList from "../components/selectedmemberslist/selectedmemberslist";
+import MessageHome from "../components/message/message";
 
 const DrawerStack = createDrawerNavigator(
   {
@@ -45,7 +46,8 @@ const AppStack = createStackNavigator(
     InvoiceItem: InvoiceItem,
     FilterMembers: FilterMembers,
     SelectedMembersList: SelectedMembersList,
-    Login: Login
+    Login: Login,
+    MessageHome: MessageHome
   },
   // {navigationOptions:{headerRight:(<SelectedMemberIcon/>)}},
   {

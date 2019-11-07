@@ -27,7 +27,10 @@ export const filterCriteria = data => dispatch => {
           responselist.push(element);
         });
         //  console.log(`this is the response --- ${responseDecoded}`);
-        dispatch({ type: FILTER_RESULT, filteredlist: responselist });
+        dispatch({
+          type: FILTER_RESULT,
+          filteredlist: responselist
+        });
       })
       .catch(error => {
         console.log(`this is the error --- ${error}`);

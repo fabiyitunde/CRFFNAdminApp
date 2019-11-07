@@ -18,7 +18,11 @@ export const sendMessage = data => dispatch => {
         var responselist = [];
 
         console.log(`this is the response --- ${response}`);
-        dispatch({ type: FILTER_RESULT, filteredlist: responselist });
+        dispatch({
+          type: FILTER_RESULT,
+          filteredlist: responselist,
+          selectedmemberslist: responselist
+        });
       })
       .catch(error => {
         console.log(`this is the error --- ${error}`);

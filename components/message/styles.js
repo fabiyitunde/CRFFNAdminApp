@@ -239,15 +239,22 @@ const styles = StyleSheet.create({
   iconitem: {
     color: Colors.hintblue
   },
+  bottom: {
+    flex: 1,
+    justifyContent: "flex-end",
+    marginBottom: 70
+    // marginTop: 100
+  },
 
   buttondialogsignup: {
     backgroundColor: Colors.loginGreen,
     alignSelf: "center",
-    bottom: 0,
-    position: "absolute",
+
     borderRadius: 40,
     width: Metrics.WIDTH * 0.65,
     height: Metrics.HEIGHT * 0.07,
+
+    marginTop: 100,
     justifyContent: "center"
   },
   buttonsignin: {

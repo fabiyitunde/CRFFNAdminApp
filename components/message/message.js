@@ -74,7 +74,7 @@ class MessageHome extends Component {
   }
 
   onBackClick() {
-    this.props.navigation.navigate("HomePage");
+    this.props.navigation.navigate("SelectedMembersList");
   }
 
   componentWillMount() {
@@ -159,7 +159,19 @@ class MessageHome extends Component {
     return (
       <Container style={styles.container}>
         <Header androidStatusBarColor={"#04920b"} style={styles.header}>
-          <Left style={styles.left}></Left>
+          <Left style={styles.left}>
+            <TouchableOpacity
+              style={styles.backArrow}
+              onPress={this.onBackClick.bind(this)}
+            >
+              <FontAwesome
+                name={I18nManager.isRTL ? "angle-right" : "angle-left"}
+                size={30}
+                color="white"
+                style={{ paddingRight: 20 }}
+              />
+            </TouchableOpacity>
+          </Left>
           <Body style={styles.body}>
             <Text style={styles.textTitle}>Message</Text>
           </Body>
@@ -225,7 +237,7 @@ class MessageHome extends Component {
               />
             </Form>
           </View>
-          <View>
+          <View style={styles.bottom}>
             <TouchableOpacity
               info
               style={styles.buttondialogsignup}

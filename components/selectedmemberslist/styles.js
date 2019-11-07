@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
   buttondialogsignup: {
     backgroundColor: Colors.loginGreen,
     alignSelf: "center",
-    //marginTop: Metrics.HEIGHT * -,
+    marginTop: Metrics.HEIGHT * 0.03,
     borderRadius: 40,
     width: Metrics.WIDTH * 0.65,
     height: Metrics.HEIGHT * 0.07,
@@ -181,6 +181,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.type.SFUIDisplaySemibold,
     color: "white"
   },
+
   searcbarstyle: {
     color: "#a3a3a3",
     width: Metrics.WIDTH * 0.9,

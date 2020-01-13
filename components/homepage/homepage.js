@@ -74,6 +74,7 @@ export default class HomePage extends Component {
       side: "left"
     };
   }
+  componentDidMount() {}
 
   componentWillMount() {
     var that = this;
@@ -81,6 +82,9 @@ export default class HomePage extends Component {
       that.props.navigation.navigate("Drawer");
       return true;
     });
+  }
+  componentWillUnmount() {
+    this.setState({ selectedTab: "Home" });
   }
 
   renderSelectedTab() {
@@ -220,9 +224,9 @@ export default class HomePage extends Component {
               onPress={() => this.setState({ selectedTab: "Logout" })}
             >
               {this.state.selectedTab == "Logout" ? (
-                <Image source={Images.logoutIcon} style={styles.tabIcon} />
+                <Image source={Images.activeLogout} style={styles.tabIcon} />
               ) : (
-                <Image source={Images.logoutIcon} style={styles.tabIcon} />
+                <Image source={Images.normalLogout} style={styles.tabIcon} />
               )}
               <Text
                 style={

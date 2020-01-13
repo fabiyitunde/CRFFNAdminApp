@@ -61,7 +61,7 @@ class FilterMembers extends Component {
       email: "",
       gsmnumber: "",
       crffnNumber: "",
-      pagesize: 10,
+      pagesize: 5,
       pagenumber: 1,
       name: "",
       filtereddata: [],

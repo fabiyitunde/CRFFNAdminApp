@@ -26,11 +26,13 @@ export const filterCriteria = data => dispatch => {
         response.data.forEach(function(element) {
           responselist.push(element);
         });
+        console.log();
         //  console.log(`this is the response --- ${responseDecoded}`);
         dispatch({
           type: FILTER_RESULT,
           filteredlist: responselist
         });
+        console.log(filteredlist);
       })
       .catch(error => {
         console.log(`this is the error --- ${error}`);

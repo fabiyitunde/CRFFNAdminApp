@@ -29,7 +29,7 @@ export const loginuser = (username, password, successcallback) => dispatch => {
     password
   };
   const body = encodeParams(data);
-  console.log(`${url} ${body}`);
+  // console.log(`${url} ${body}`);
   const axios = getaxious();
   const request = axios.post("/token", body);
   request
@@ -41,6 +41,7 @@ export const loginuser = (username, password, successcallback) => dispatch => {
         userName: response.data.userName,
         access_token: response.data.access_token
       };
+      console.log(logindetail.access_token);
       dispatch({ type: LOGIN, logininfo: logindetail });
       successcallback();
     })
@@ -60,7 +61,7 @@ export const loadloginuserInfo = () => dispatch => {
   })();
 };
 
-export const logoutuser = (successcallback) => dispatch => {
+export const logoutuser = successcallback => dispatch => {
   (async () => {
     await AsyncStorage.setItem("userToken", "");
   })();

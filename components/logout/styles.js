@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
     width: Metrics.WIDTH,
     height: Metrics.HEIGHT
   },
+  content: { marginTop: Metrics.HEIGHT * 0.2 },
   logoSec: {
     width: Metrics.WIDTH,
     height: Metrics.HEIGHT * 0.26,
@@ -51,7 +52,7 @@ const styles = StyleSheet.create({
   imageLogoMountify: {
     alignSelf: "center",
     width: Metrics.WIDTH * 0.25,
-    height: Metrics.WIDTH * 0.22
+    height: Metrics.WIDTH * 0.25
   },
   textInput: {
     backgroundColor: "#fff",
@@ -83,7 +84,7 @@ const styles = StyleSheet.create({
   textForgotPsssword: {
     textAlign: "center",
     fontSize: Fonts.moderateScale(22),
-    color: Colors.bloodOrange,
+    color: Colors.fire,
     marginBottom: 30,
     fontFamily: Fonts.type.sfuiDisplayRegular
   },

@@ -40,7 +40,8 @@ const styles = StyleSheet.create({
   },
   imgContainer: {
     width: Metrics.WIDTH,
-    height: Metrics.HEIGHT
+    height: Metrics.HEIGHT,
+    flex: 1
   },
   logoSec: {
     width: Metrics.WIDTH,
@@ -51,7 +52,7 @@ const styles = StyleSheet.create({
   imageLogoMountify: {
     alignSelf: "center",
     width: Metrics.WIDTH * 0.25,
-    height: Metrics.WIDTH * 0.22
+    height: Metrics.WIDTH * 0.25
   },
   textInput: {
     backgroundColor: "#fff",

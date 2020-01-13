@@ -115,6 +115,12 @@ const styles = StyleSheet.create({
     paddingLeft: Metrics.WIDTH * 0.045,
     paddingRight: Metrics.WIDTH * 0.045
   },
+  mainRow2: {
+    alignSelf: "center",
+
+    paddingTop: Metrics.HEIGHT * 0.018,
+    paddingBottom: Metrics.HEIGHT * 0.045
+  },
   ImageBG: { alignSelf: "center", width: Metrics.WIDTH },
   itemHeader: {
     alignSelf: "center",

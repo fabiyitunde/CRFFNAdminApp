@@ -82,6 +82,60 @@ class InvoiceItem extends Component {
       remitatranslist
     } = selectedinvoice;
 
+    const paymentListIsNull = (
+      <View style={styles.mainRow2}>
+        <Text>No Payment Information</Text>
+      </View>
+    );
+    const Paymentview = () => {
+      if (paymentrequestlist !== undefined || null)
+        return (
+          <View>
+            {paymentrequestlist.map((item, key) => (
+              <View key={key}>
+                <View style={styles.mainRow}>
+                  <Text style={styles.labelText}>Charges</Text>
+                  <Text style={[styles.infoText, { color: "#0e1130" }]}>
+                    {item.charges}
+                  </Text>
+                </View>
+                <View style={styles.mainRow}>
+                  <Text style={styles.labelText}>Payment Gateway</Text>
+                  <Text style={[styles.infoText, { color: "#0e1130" }]}>
+                    {item.paymentgateway}
+                  </Text>
+                </View>
+                <View style={styles.mainRow}>
+                  <Text style={styles.labelText}>Status</Text>
+                  <Text style={[styles.infoText, { color: "#0e1130" }]}>
+                    {item.status}
+                  </Text>
+                </View>
+                <View style={styles.mainRow}>
+                  <Text style={styles.labelText}>Transaction Date</Text>
+                  <Text style={[styles.infoText, { color: "#0e1130" }]}>
+                    {item.transdate}
+                  </Text>
+                </View>
+                <View style={styles.mainRow}>
+                  <Text style={styles.labelText}>Transaction Reference</Text>
+                  <Text style={[styles.infoText, { color: "#0e1130" }]}>
+                    {item.transref}
+                  </Text>
+                </View>
+                <View style={styles.mainRow}>
+                  <Text style={{ color: "#ffffff" }}>end</Text>
+                  <Text style={[styles.infoText, { color: "#ffffff" }]}>
+                    end
+                  </Text>
+                </View>
+                <View style={styles.dividerHorizontal} />
+              </View>
+            ))}
+          </View>
+        );
+      else return paymentListIsNull;
+    };
     return (
       <Container style={styles.container}>
         <Header androidStatusBarColor={"#0c0811"} style={styles.header}>
@@ -216,51 +270,7 @@ class InvoiceItem extends Component {
                     <Text style={styles.itemHeader}>Payment Details</Text>
                   </View>
                   <View style={styles.dividerHorizontal} />
-                  <View>
-                    {paymentrequestlist.map((item, key) => (
-                      <View key={key}>
-                        <View style={styles.mainRow}>
-                          <Text style={styles.labelText}>Charges</Text>
-                          <Text style={[styles.infoText, { color: "#0e1130" }]}>
-                            {item.charges}
-                          </Text>
-                        </View>
-                        <View style={styles.mainRow}>
-                          <Text style={styles.labelText}>Payment Gateway</Text>
-                          <Text style={[styles.infoText, { color: "#0e1130" }]}>
-                            {item.paymentgateway}
-                          </Text>
-                        </View>
-                        <View style={styles.mainRow}>
-                          <Text style={styles.labelText}>Status</Text>
-                          <Text style={[styles.infoText, { color: "#0e1130" }]}>
-                            {item.status}
-                          </Text>
-                        </View>
-                        <View style={styles.mainRow}>
-                          <Text style={styles.labelText}>Transaction Date</Text>
-                          <Text style={[styles.infoText, { color: "#0e1130" }]}>
-                            {item.transdate}
-                          </Text>
-                        </View>
-                        <View style={styles.mainRow}>
-                          <Text style={styles.labelText}>
-                            Transaction Reference
-                          </Text>
-                          <Text style={[styles.infoText, { color: "#0e1130" }]}>
-                            {item.transref}
-                          </Text>
-                        </View>
-                        <View style={styles.mainRow}>
-                          <Text style={{ color: "#ffffff" }}>end</Text>
-                          <Text style={[styles.infoText, { color: "#ffffff" }]}>
-                            end
-                          </Text>
-                        </View>
-                        <View style={styles.dividerHorizontal} />
-                      </View>
-                    ))}
-                  </View>
+                  <Paymentview />
                 </View>
               </ScrollView>
             </View>
@@ -283,7 +293,4 @@ function mapStateToProps(state, props) {
 }
 
 //Connect everything
-export default connect(
-  mapStateToProps,
-  {}
-)(InvoiceItem);
+export default connect(mapStateToProps, {})(InvoiceItem);

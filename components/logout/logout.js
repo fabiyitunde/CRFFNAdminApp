@@ -27,6 +27,7 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import styles from "./styles";
 import { connect } from "react-redux";
 import { logoutuser } from "../../redux/actions/authActions";
+import { Images, Fonts, Metrics, Colors } from "../../Themes/";
 class Logout extends Component {
   constructor(props) {
     super(props);
@@ -35,25 +36,21 @@ class Logout extends Component {
   handleLogout = () => {
     //this.props.navigation.navigate("Login");
     this.props.logoutuser(() => {
-      this.props.navigation.navigate("Login");
+      this.props.navigation.navigate("SignIn");
     });
   };
   componentWillMount() {
     var that = this;
     BackHandler.addEventListener("hardwareBackPress", function() {
-      that.props.navigation.navigate("Home");
+      that.props.navigation.navigate("HomePage");
       return true;
     });
   }
 
   render() {
-    const imageUri =
-      "http://aggregatesolution.com/wp-content/uploads/2019/10/login2-1.jpg";
-    const imageMountifyLogo =
-      "http://aggregatesolution.com/wp-content/uploads/2019/10/loginlogo-1.png";
     return (
       <Container>
-        <ImageBackground style={styles.imgContainer} source={{ uri: imageUri }}>
+        <ImageBackground style={styles.imgContainer} source={Images.logoutbg}>
           <Header style={styles.header}>
             <Left style={styles.left}>
               <TouchableOpacity
@@ -68,16 +65,16 @@ class Logout extends Component {
               </TouchableOpacity>
             </Left>
             <Body style={styles.body}>
-              <Text style={styles.textTitle}>Sign In</Text>
+              <Text style={styles.textTitle}>Logout</Text>
             </Body>
             <Right style={styles.right} />
           </Header>
 
-          <Content>
+          <Content style={styles.content}>
             <View style={styles.logoSec}>
               <Image
                 style={styles.imageLogoMountify}
-                source={{ uri: imageMountifyLogo }}
+                source={Images.crffnlogo}
               />
             </View>
 
@@ -102,7 +99,4 @@ function mapStateToProps(state, props) {
 }
 
 //Connect everything
-export default connect(
-  mapStateToProps,
-  { logoutuser }
-)(Logout);
+export default connect(mapStateToProps, { logoutuser })(Logout);

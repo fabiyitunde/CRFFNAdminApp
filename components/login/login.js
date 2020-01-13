@@ -23,10 +23,12 @@ import {
   Title
 } from "native-base";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import { Images, Fonts, Metrics, Colors } from "../../Themes/";
 // Screen Styles
 import styles from "./styles";
 import { connect } from "react-redux";
 import { loginuser } from "../../redux/actions/authActions";
+
 class Login extends Component {
   state = {
     email: "",
@@ -38,13 +40,13 @@ class Login extends Component {
   }
   handleLogin() {
     this.props.loginuser(this.state.email, this.state.password, () => {
-      this.props.navigation.navigate("Home");
+      this.props.navigation.navigate("HomePage");
     });
   }
   componentWillMount() {
     var that = this;
     BackHandler.addEventListener("hardwareBackPress", function() {
-      that.props.navigation.navigate("Home");
+      that.props.navigation.navigate("HomePage");
       return true;
     });
   }
@@ -56,7 +58,7 @@ class Login extends Component {
       "http://aggregatesolution.com/wp-content/uploads/2019/10/loginlogo-1.png";
     return (
       <Container>
-        <ImageBackground style={styles.imgContainer} source={{ uri: imageUri }}>
+        <ImageBackground style={styles.imgContainer} source={Images.loginbg}>
           <Header style={styles.header}>
             <Left style={styles.left}>
               <TouchableOpacity
@@ -80,7 +82,7 @@ class Login extends Component {
             <View style={styles.logoSec}>
               <Image
                 style={styles.imageLogoMountify}
-                source={{ uri: imageMountifyLogo }}
+                source={Images.crffnlogo}
               />
             </View>
             <TextInput
@@ -136,7 +138,4 @@ function mapStateToProps(state, props) {
 }
 
 //Connect everything
-export default connect(
-  mapStateToProps,
-  { loginuser }
-)(Login);
+export default connect(mapStateToProps, { loginuser })(Login);

@@ -199,13 +199,13 @@ const styles = StyleSheet.create({
   },
 
   activeTab: {
-    color: Colors.darkBlue,
+    color: Colors.snow,
     // 	fontFamily: Fonts.type.helveticaNeueLight,
     fontSize: Fonts.moderateScale(15)
   },
 
   normalTab: {
-    color: Colors.yellow,
+    color: Colors.loginGreen,
     // 	fontFamily: Fonts.type.helveticaNeueLight,
     fontSize: Fonts.moderateScale(15)
   },
@@ -214,7 +214,7 @@ const styles = StyleSheet.create({
     width: Metrics.WIDTH * 0.47,
     height: Metrics.HEIGHT * 0.05,
     backgroundColor: "transparent",
-    borderColor: Colors.yellow,
+    borderColor: Colors.loginGreen,
     justifyContent: "center",
     alignSelf: "center"
   },
@@ -222,8 +222,8 @@ const styles = StyleSheet.create({
   segmentSelectedTab: {
     width: Metrics.WIDTH * 0.47,
     height: Metrics.HEIGHT * 0.05,
-    backgroundColor: Colors.yellow,
-    borderColor: Colors.yellow,
+    backgroundColor: Colors.loginGreen,
+    borderColor: Colors.loginGreen,
     justifyContent: "center",
     alignSelf: "center",
     borderRadius: Metrics.HEIGHT * 0.007
@@ -235,7 +235,7 @@ const styles = StyleSheet.create({
     marginVertical: Metrics.HEIGHT * 0.03,
     borderRadius: Metrics.HEIGHT * 0.007,
     backgroundColor: Colors.snow,
-    borderColor: Colors.yellow,
+    borderColor: Colors.loginGreen,
     padding: 0,
     borderWidth: 1,
     alignSelf: "center"

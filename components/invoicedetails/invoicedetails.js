@@ -164,7 +164,9 @@ export default class InvoiceDetails extends Component {
         </Header>
         <KeyboardAwareScrollView>
           <View style={styles.content}>
-            <Segment style={styles.segmentTabSec}>
+            <Segment
+              style={(styles.segmentTabSec, { backgroundColor: "#0e1130" })}
+            >
               <Button
                 first
                 style={

@@ -13,7 +13,27 @@ const styles = StyleSheet.create({
     paddingLeft: Metrics.WIDTH * 0.05,
     paddingRight: Metrics.WIDTH * 0.05
   },
+  isloading: {
+    position: "absolute",
+    height: Metrics.HEIGHT,
+    width: Metrics.WIDTH,
+    zIndex: 10,
+    backgroundColor: "rgba(0, 0, 0, 0.7)",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  container: {
+    height: "auto",
+    width: Metrics.WIDTH,
 
+    backgroundColor: Colors.transparent
+  },
+  container2: {
+    height: Metrics.HEIGHT,
+    width: Metrics.WIDTH,
+
+    backgroundColor: Colors.transparent
+  },
   left: {
     flex: 0.5,
     backgroundColor: Colors.transparent
@@ -80,7 +100,8 @@ const styles = StyleSheet.create({
     color: "#6f6f6f",
     fontSize: Fonts.moderateScale(16),
     fontFamily: Fonts.type.sfuiDisplayMedium,
-    textAlign: "left"
+    textAlign: "left",
+    textTransform: "capitalize"
   },
 
   rowDesignationTxt: {

@@ -16,8 +16,8 @@ export const sendMessage = data => dispatch => {
       .post(url, body, { headers })
       .then(response => {
         var responselist = [];
-
-        console.log(`this is the response --- ${response}`);
+        var responseMessage = JSON.stringify(response);
+        console.log(`this is the response --- ${responseMessage}`);
         dispatch({
           type: FILTER_RESULT,
           filteredlist: responselist,
@@ -25,7 +25,8 @@ export const sendMessage = data => dispatch => {
         });
       })
       .catch(error => {
-        console.log(`this is the error --- ${error}`);
+        var errorMessage = JSON.stringify(error);
+        console.log(`this is the error from message --- ${errorMessage}`);
       });
   });
 };

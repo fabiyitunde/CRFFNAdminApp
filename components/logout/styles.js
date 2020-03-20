@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
   },
   textForgotPsssword: {
     textAlign: "center",
-    fontSize: Fonts.moderateScale(22),
+    fontSize: Fonts.moderateScale(20),
     color: Colors.fire,
     marginBottom: 30,
     fontFamily: Fonts.type.sfuiDisplayRegular

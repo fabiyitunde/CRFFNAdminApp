@@ -87,6 +87,15 @@ class InvoiceList extends Component {
 
     this.setState({ filtereddata: filteredlist });
   };
+  isloading = () => {
+    if (this.state.isprocessing == true || !this.state.data) {
+      return (
+        <View style={styles.isloading}>
+          <ActivityIndicator size="large" color="#e7ffe6" />
+        </View>
+      );
+    }
+  };
   transformDataForDisplay = serverdata => {
     const returndata = {
       id: Number(serverdata.invoiceheader.id),
@@ -105,56 +114,63 @@ class InvoiceList extends Component {
       StatusBar.setBackgroundColor("#2d324f", true);
       StatusBar.setTranslucent(true);
     }
-    if (this.state.isprocessing == true || !this.state.data)
-      return <ActivityIndicator size="large" color="#0000ff" />;
     return (
       <View>
-        <View androidStatusBarColor={"#0e1130"} style={styles.header}>
-          <SearchBar
-            style={styles.searcbarstyle}
-            round //To make the searchbar corner round (default square)
-            searchIcon={{ size: 24 }} //Size of the search icon
-            onChangeText={text => this.SearchFilterFunction(text)}
-            onClear={text => this.SearchFilterFunction("")}
-            placeholder="Search Invoice..."
-            value={this.state.searchtext}
-          />
-        </View>
-
         <View
-          style={styles.listMainView}
-          animation="zoomInDown"
-          duration={1100}
-          delay={1400}
+          style={
+            this.state.isprocessing == true
+              ? styles.container2
+              : styles.container
+          }
         >
-          {this.state.filtereddata.map((serveritem, index) => {
-            const item = this.transformDataForDisplay(serveritem);
+          <View>{this.isloading()}</View>
+          <View androidStatusBarColor={"#0e1130"} style={styles.header}>
+            <SearchBar
+              style={styles.searcbarstyle}
+              round //To make the searchbar corner round (default square)
+              searchIcon={{ size: 24 }} //Size of the search icon
+              onChangeText={text => this.SearchFilterFunction(text)}
+              onClear={text => this.SearchFilterFunction("")}
+              placeholder="Search Invoice..."
+              value={this.state.searchtext}
+            />
+          </View>
 
-            return (
-              <View style={styles.rowBg} key={index}>
-                <View style={styles.rowView}>
-                  <View style={styles.namePostView}>
-                    <Text style={styles.rowNameTxt}>{item.name}</Text>
+          <View
+            style={styles.listMainView}
+            animation="zoomInDown"
+            duration={1100}
+            delay={1400}
+          >
+            {this.state.filtereddata.map((serveritem, index) => {
+              const item = this.transformDataForDisplay(serveritem);
+
+              return (
+                <View style={styles.rowBg} key={index}>
+                  <View style={styles.rowView}>
+                    <View style={styles.namePostView}>
+                      <Text style={styles.rowNameTxt}>{item.name}</Text>
+                    </View>
+                    <View style={{ justifyContent: "center" }}>
+                      <TouchableOpacity
+                        style={styles.followBgSelected}
+                        onPress={() => this.handleOnViewDetail(item)}
+                      >
+                        <Text style={styles.followTxtSelected}>Details</Text>
+                      </TouchableOpacity>
+                    </View>
                   </View>
-                  <View style={{ justifyContent: "center" }}>
-                    <TouchableOpacity
-                      style={styles.followBgSelected}
-                      onPress={() => this.handleOnViewDetail(item)}
-                    >
-                      <Text style={styles.followTxtSelected}>Details</Text>
-                    </TouchableOpacity>
-                  </View>
+                  <View
+                    style={
+                      index === this.state.data.length - 1
+                        ? null
+                        : styles.dividerHorizontal
+                    }
+                  />
                 </View>
-                <View
-                  style={
-                    index === this.state.data.length - 1
-                      ? null
-                      : styles.dividerHorizontal
-                  }
-                />
-              </View>
-            );
-          })}
+              );
+            })}
+          </View>
         </View>
       </View>
     );
@@ -202,7 +218,4 @@ function mapStateToProps(state, props) {
 }
 
 //Connect everything
-export default connect(
-  mapStateToProps,
-  { loadInvoiceList }
-)(InvoiceList);
+export default connect(mapStateToProps, { loadInvoiceList })(InvoiceList);

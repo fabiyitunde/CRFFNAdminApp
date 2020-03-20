@@ -1,7 +1,8 @@
-import { LOGIN, LOGOUT } from "../actionTypes";
+import { LOGIN, LOGOUT, RELOADLOGIN } from "../actionTypes";
 
 const initialState = {
-  logininfo: {}
+  logininfo: {},
+  errorMessage: {}
 };
 
 export default function(state = initialState, action) {
@@ -9,11 +10,21 @@ export default function(state = initialState, action) {
     case LOGIN:
       return {
         ...state,
-        logininfo: action.logininfo
+        logininfo: action.logininfo,
+        errorMessage: action.errorMessage
+      };
+    case RELOADLOGIN:
+      console.log("RELOADLOGIN");
+      return {
+        ...state,
+
+        errorMessage: {}
       };
     case LOGOUT:
       return {
-        ...state
+        ...state,
+        logininfo: initialState.logininfo,
+        errorMessage: initialState.errorMessage
       };
 
     default:

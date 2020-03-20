@@ -7,6 +7,27 @@ const styles = StyleSheet.create({
     width: Metrics.WIDTH,
     backgroundColor: Colors.snow
   },
+  isloading: {
+    position: "absolute",
+    height: Metrics.HEIGHT,
+    width: Metrics.WIDTH,
+    zIndex: 10,
+    backgroundColor: "rgba(0, 0, 0, 0.7)",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  // container: {
+  //   height: "auto",
+  //   width: Metrics.WIDTH,
+
+  //   backgroundColor: Colors.transparent
+  // },
+  // container2: {
+  //   height: Metrics.HEIGHT,
+  //   width: Metrics.WIDTH,
+
+  //   backgroundColor: Colors.transparent
+  // },
 
   header: {
     // backgroundColor: "#2d324f",

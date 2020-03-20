@@ -7,7 +7,9 @@ import {
   TouchableOpacity,
   ImageBackground,
   BackHandler,
-  I18nManager
+  I18nManager,
+  ActivityIndicator,
+  Animated
 } from "react-native";
 import {
   Container,
@@ -27,18 +29,50 @@ import { Images, Fonts, Metrics, Colors } from "../../Themes/";
 // Screen Styles
 import styles from "./styles";
 import { connect } from "react-redux";
-import { loginuser } from "../../redux/actions/authActions";
+import { loginuser, reloadlogin } from "../../redux/actions/authActions";
+import * as Animatable from "react-native-animatable";
 
 class Login extends Component {
   state = {
+    errorHandler: "",
     email: "",
-    password: ""
+    password: "",
+    isloading: false
   };
   constructor(props) {
     super(props);
     this.handleLogin = this.handleLogin.bind(this);
   }
+  loading = () => {
+    if (
+      this.state.isloading == true &&
+      JSON.stringify(this.props.errorMessage) === "{}"
+    ) {
+      return <ActivityIndicator size="large"></ActivityIndicator>;
+    }
+
+    if (JSON.stringify(this.props.errorMessage) !== "{}") {
+      return (
+        <Text
+          style={{
+            justifyContent: "center",
+            textAlign: "center",
+            color: "red"
+          }}
+        >
+          Invalid Username/Email or Password
+        </Text>
+      );
+    }
+  };
+
   handleLogin() {
+    this.props.reloadlogin();
+    this.setState({ isloading: true });
+    if (JSON.stringify(this.props.errorMessage) !== "{}") {
+      this.props.errorMessage = {};
+      console.log(JSON.stringify(this.props.errorMessage));
+    }
     this.props.loginuser(this.state.email, this.state.password, () => {
       this.props.navigation.navigate("HomePage");
     });
@@ -52,10 +86,6 @@ class Login extends Component {
   }
 
   render() {
-    const imageUri =
-      "http://aggregatesolution.com/wp-content/uploads/2019/10/login2-1.jpg";
-    const imageMountifyLogo =
-      "http://aggregatesolution.com/wp-content/uploads/2019/10/loginlogo-1.png";
     return (
       <Container>
         <ImageBackground style={styles.imgContainer} source={Images.loginbg}>
@@ -63,7 +93,7 @@ class Login extends Component {
             <Left style={styles.left}>
               <TouchableOpacity
                 style={styles.backArrow}
-                onPress={() => this.props.navigation.navigate("Home")}
+                onPress={() => this.props.navigation.navigate("Dashboard")}
               >
                 <FontAwesome
                   name={I18nManager.isRTL ? "angle-right" : "angle-left"}
@@ -85,6 +115,7 @@ class Login extends Component {
                 source={Images.crffnlogo}
               />
             </View>
+            <View>{this.loading()}</View>
             <TextInput
               style={styles.textInput}
               placeholder="Email"
@@ -134,8 +165,11 @@ class Login extends Component {
   }
 }
 function mapStateToProps(state, props) {
-  return {};
+  return {
+    logininfo: state.auth.logininfo,
+    errorMessage: state.auth.errorMessage
+  };
 }
 
 //Connect everything
-export default connect(mapStateToProps, { loginuser })(Login);
+export default connect(mapStateToProps, { loginuser, reloadlogin })(Login);

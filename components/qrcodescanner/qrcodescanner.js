@@ -11,7 +11,8 @@ import {
   ScrollView,
   I18nManager,
   AsyncStorage,
-  StyleSheet
+  StyleSheet,
+  ActivityIndicator
 } from "react-native";
 import {
   Content,
@@ -98,7 +99,17 @@ export default class QRCodeScanner extends Component {
     const { hasCameraPermission, scanned } = this.state;
 
     if (hasCameraPermission === null) {
-      return <Text>Requesting for camera permission</Text>;
+      return (
+        <Text
+          style={{
+            textAlign: "center",
+            justifyContent: "center",
+            marginTop: 100
+          }}
+        >
+          Requesting For Camera Permission
+        </Text>
+      );
     }
     if (hasCameraPermission === false) {
       return <Text>No access to camera </Text>;

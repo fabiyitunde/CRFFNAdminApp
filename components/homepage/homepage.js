@@ -38,7 +38,11 @@ import MyControlPanel from "./ControlPanel";
 import Invoicelist from "../invoicelist/invoicelist";
 import FilterMembers from "../filtermembers/filtermembers";
 import QRCodeScanner from "../qrcodescanner/qrcodescanner";
+import NFCScanner from "../nfcscanner/nfcscanner";
+import Dashboard from "../dashboard/dashboard";
 import Logout from "../logout/logout";
+
+import App from "react-native-nfc-manager/example/App";
 const drawerStyles = {
   drawer: {
     shadowColor: "#000000",
@@ -53,7 +57,7 @@ export default class HomePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedTab: "Home",
+      selectedTab: "Dashboard",
       drawerType: "static",
 
       openDrawerOffset: 50,
@@ -84,11 +88,82 @@ export default class HomePage extends Component {
     });
   }
   componentWillUnmount() {
-    this.setState({ selectedTab: "Home" });
+    this.setState({ selectedTab: "Dashboard" });
   }
 
   renderSelectedTab() {
     switch (this.state.selectedTab) {
+      case "Dashboard":
+        return (
+          <View>
+            <ImageBackground
+              style={styles.imgContainer}
+              source={Images.dashboardBG}
+            >
+              <Header androidStatusBarColor={"#04920b"} style={styles.header}>
+                <Text style={styles.textTitle}>Dashboard</Text>
+              </Header>
+              <View>
+                <View style={styles.rowView}>
+                  <View style={styles.columnone}>
+                    <TouchableOpacity
+                      onPress={() => this.setState({ selectedTab: "Home" })}
+                    >
+                      <View style={styles.box}>
+                        <Icon name="contact" style={styles.icon} />
+                        <Text style={styles.iconDescription}>
+                          Practitioners
+                        </Text>
+                      </View>
+                    </TouchableOpacity>
+                  </View>
+                  <View style={styles.columntwo}>
+                    <TouchableOpacity
+                      onPress={() => this.setState({ selectedTab: "Invoices" })}
+                    >
+                      <View style={styles.box}>
+                        <Icon name="list" style={styles.icon} />
+
+                        <Text style={styles.iconDescription}>Invoice List</Text>
+                      </View>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+                <View style={styles.rowView}>
+                  <View style={styles.columnone}>
+                    <TouchableOpacity
+                      onPress={() => this.setState({ selectedTab: "ScanCode" })}
+                    >
+                      <View style={styles.box}>
+                        <Icon
+                          type="FontAwesome"
+                          name="camera"
+                          style={styles.icon}
+                        />
+                        <Text style={styles.iconDescription}>Scan</Text>
+                      </View>
+                    </TouchableOpacity>
+                  </View>
+
+                  <View style={styles.columntwo}>
+                    <TouchableOpacity
+                      onPress={() =>
+                        this.setState({ selectedTab: "FilterMembers" })
+                      }
+                    >
+                      <View style={styles.box}>
+                        <Icon name="mail" style={styles.icon} />
+
+                        <Text style={styles.iconDescription}>Messages</Text>
+                      </View>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </View>
+            </ImageBackground>
+          </View>
+        );
+        break;
       case "Home":
         return <Home {...this.props} />;
         break;
@@ -102,7 +177,10 @@ export default class HomePage extends Component {
         return <FilterMembers {...this.props} />;
         break;
       case "Profile":
-        return <Home {...this.props} />;
+        return <Dashboard {...this.props} />;
+        break;
+      case "NFCScanner":
+        return <NFCScanner {...this.props} />;
         break;
       case "Logout":
         return <Logout {...this.props} />;
@@ -126,16 +204,16 @@ export default class HomePage extends Component {
           <FooterTab style={styles.footerTabBg}>
             <Button
               vertical
-              onPress={() => this.setState({ selectedTab: "Home" })}
+              onPress={() => this.setState({ selectedTab: "Dashboard" })}
             >
-              {this.state.selectedTab == "Home" ? (
+              {this.state.selectedTab == "Dashboard" ? (
                 <Image source={Images.activeHome} style={styles.tabIcon} />
               ) : (
                 <Image source={Images.normalHome} style={styles.tabIcon} />
               )}
               <Text
                 style={
-                  this.state.selectedTab == "Home"
+                  this.state.selectedTab == "Dashboard"
                     ? [
                         styles.activeTabText,
                         { marginTop: Metrics.WIDTH * 0.01 }
@@ -174,6 +252,31 @@ export default class HomePage extends Component {
                 Scan Code
               </Text>
             </Button>
+            {/* <Button
+              vertical
+              onPress={() => this.setState({ selectedTab: "NFCScanner" })}
+            >
+              {this.state.selectedTab == "NFCScanner" ? (
+                <Image source={Images.activeScan} style={styles.tabIcon} />
+              ) : (
+                <Image source={Images.normalScan} style={styles.tabIcon} />
+              )}
+              <Text
+                style={
+                  this.state.selectedTab == "NFCScanner"
+                    ? [
+                        styles.activeTabText,
+                        { marginTop: Metrics.WIDTH * 0.01 }
+                      ]
+                    : [
+                        styles.normalTabText,
+                        { marginTop: Metrics.WIDTH * 0.01 }
+                      ]
+                }
+              >
+                NFC Scan
+              </Text>
+            </Button> */}
             <Button
               vertical
               onPress={() => this.setState({ selectedTab: "Invoices" })}
@@ -244,26 +347,6 @@ export default class HomePage extends Component {
                 Logout
               </Text>
             </Button>
-            {/* 
-            <Button
-              vertical
-              onPress={() => this.setState({ selectedTab: "Profile" })}
-            >
-              {this.state.selectedTab == "Profile" ? (
-                <EvilIcons name="user" size={30} color="#00bff3" />
-              ) : (
-                <EvilIcons name="user" size={30} color="#929292" />
-              )}
-              <Text
-                style={
-                  this.state.selectedTab == "Profile"
-                    ? styles.activeTabText
-                    : styles.normalTabText
-                }
-              >
-                Profile
-              </Text>
-            </Button> */}
           </FooterTab>
         </Footer>
       </Container>

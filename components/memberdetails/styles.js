@@ -8,10 +8,21 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.snow
   },
 
+  textTitle: {
+    color: Colors.snow,
+    fontSize: Fonts.moderateScale(18),
+    alignSelf: "center",
+    fontFamily: Fonts.type.helveticaNeueLight
+  },
   header: {
-    backgroundColor: "#04920b",
-    height: Metrics.HEIGHT * 0.1,
+    fontWeight: "bold",
+    backgroundColor: "#181818",
+    height: Metrics.HEIGHT * 0.12,
     borderBottomWidth: 0,
+    //paddingTop: Metrics.HEIGHT * 0.03,
+    elevation: 0,
+    paddingLeft: Metrics.WIDTH * 0.05,
+    paddingRight: Metrics.WIDTH * 0.05,
     ...Platform.select({
       ios: {
         paddingTop: Metrics.HEIGHT * 0.02
@@ -39,13 +50,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     backgroundColor: Colors.transparent
-  },
-
-  textTitle: {
-    color: Colors.snow,
-    fontSize: Fonts.moderateScale(20),
-    alignSelf: "center",
-    fontFamily: Fonts.type.helveticaNeueLight
   },
 
   right: {
@@ -98,7 +102,8 @@ const styles = StyleSheet.create({
   },
 
   mainView: {
-    height: Metrics.HEIGHT * 0.9
+    height: Metrics.HEIGHT * 0.9,
+    backgroundColor: "#2f2f2f"
   },
 
   mainRow: {
@@ -108,7 +113,7 @@ const styles = StyleSheet.create({
     paddingLeft: Metrics.WIDTH * 0.045,
     paddingRight: Metrics.WIDTH * 0.045
   },
-  secondRow: { marginTop: Metrics.HEIGHT * -0.218 },
+  secondRow: { marginTop: Metrics.HEIGHT * -0.258 },
   infoRow: {
     flexDirection: "row",
     width: Metrics.WIDTH * 0.5
@@ -116,6 +121,7 @@ const styles = StyleSheet.create({
   labelHeaderText: {
     color: "#ffffff",
     width: Metrics.WIDTH * 0.9,
+    textTransform: "capitalize",
     fontSize: Fonts.moderateScale(18),
     fontFamily: Fonts.type.helveticaNeueLight,
     textAlign: "left",
@@ -125,7 +131,8 @@ const styles = StyleSheet.create({
   },
 
   labelText: {
-    color: "#a3a3a3",
+    fontWeight: "bold",
+    color: "#c3c3c3",
     width: Metrics.WIDTH * 0.2,
     fontSize: Fonts.moderateScale(16),
     fontFamily: Fonts.type.helveticaNeueLight,
@@ -133,7 +140,7 @@ const styles = StyleSheet.create({
   },
 
   infoText: {
-    width: Metrics.WIDTH * 0.5,
+    width: Metrics.WIDTH * 0.9,
     fontSize: Fonts.moderateScale(16),
     fontFamily: Fonts.type.helveticaNeueLight,
     textAlign: "left"

@@ -5,9 +5,9 @@ const styles = StyleSheet.create({
   container: {
     height: Metrics.HEIGHT,
     width: Metrics.WIDTH,
-    backgroundColor: Colors.snow
+    backgroundColor: "#2f2f2f"
   },
-
+  insideContainer: { height: Metrics.HEIGHT, backgroundColor: "#2f2f2f" },
   header: {
     backgroundColor: "#0e1130",
     height: Metrics.HEIGHT * 0.1,
@@ -98,9 +98,17 @@ const styles = StyleSheet.create({
   },
 
   mainView: {
-    height: Metrics.HEIGHT * 0.9
+    height: Metrics.HEIGHT * 0.3
   },
-
+  isloading: {
+    position: "absolute",
+    height: Metrics.HEIGHT,
+    width: Metrics.WIDTH,
+    zIndex: 10,
+    backgroundColor: "rgba(0, 0, 0, 0.7)",
+    justifyContent: "center",
+    alignItems: "center"
+  },
   mainRow: {
     flexDirection: "row",
     paddingTop: Metrics.HEIGHT * 0.018,
@@ -108,17 +116,21 @@ const styles = StyleSheet.create({
     paddingLeft: Metrics.WIDTH * 0.045,
     paddingRight: Metrics.WIDTH * 0.045
   },
+  mainRow2: {
+    flexDirection: "row"
+  },
 
   labelText: {
-    color: "#a3a3a3",
-    width: Metrics.WIDTH * 0.4,
+    fontWeight: "bold",
+    color: "#c3c3c3",
+    width: Metrics.WIDTH * 0.3,
     fontSize: Fonts.moderateScale(16),
     fontFamily: Fonts.type.helveticaNeueLight,
     textAlign: "left"
   },
 
   infoText: {
-    width: Metrics.WIDTH * 0.5,
+    width: Metrics.WIDTH * 0.7,
     fontSize: Fonts.moderateScale(16),
     fontFamily: Fonts.type.helveticaNeueLight,
     textAlign: "left"
@@ -161,11 +173,18 @@ const styles = StyleSheet.create({
     fontSize: Fonts.moderateScale(16),
     fontFamily: Fonts.type.helveticaNeueLight
   },
+  imageContent: {
+    alignItems: "center",
+    justifyContent: "center",
+    alignContent: "center",
+    width: Metrics.WIDTH,
+    paddingTop: Metrics.HEIGHT * 0.048
+  },
   profileImg: {
-    width: Metrics.WIDTH * 0.32,
-    height: Metrics.WIDTH * 0.32,
-    borderRadius: Metrics.WIDTH * 0.06,
-    alignSelf: "flex-start"
+    width: Metrics.WIDTH * 0.35,
+    height: Metrics.WIDTH * 0.35,
+    borderRadius: Metrics.WIDTH * 1,
+    alignSelf: "center"
   }
 });
 

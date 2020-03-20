@@ -28,6 +28,9 @@ import {
   Header,
   Picker,
   Left,
+  List,
+  ListItem,
+  Thumbnail,
   Body,
   Button,
   Title,
@@ -44,9 +47,12 @@ import ScrollableTabView, {
 } from "../../UIComponents/react-native-scrollable-tab-view";
 import { SearchBar } from "react-native-elements";
 import { loadMembersList } from "../../redux/actions/membersAction";
-import { mapDispatchToProps } from "../../redux/actions/selectedmembersAction";
 
-import { filterCriteria } from "../../redux/actions/selectedmembersAction";
+import {
+  filterCriteria,
+  reloadlist,
+  mapDispatchToProps
+} from "../../redux/actions/selectedmembersAction";
 
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
@@ -54,9 +60,10 @@ class FilterMembers extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      isloading: false,
       isprocessing: false,
       data: [],
-
+      errorswitch: Boolean,
       category: "",
       email: "",
       gsmnumber: "",
@@ -84,7 +91,36 @@ class FilterMembers extends Component {
       return true;
     });
   }
+  loadingList = () => {
+    {
+      if (
+        this.state.isloading == true &&
+        this.props.filteredlist.length == 0 &&
+        this.props.errorMessage == ""
+      ) {
+        return <ActivityIndicator size="large"></ActivityIndicator>;
+      }
+    }
+    if (
+      this.props.errorMessage == "Error: Request failed with status code 400"
+    ) {
+      return (
+        <Text style={styles.errortext}>Please Select a Valid Category!</Text>
+      );
+    }
+  };
+  isloading = () => {
+    if (this.state.isprocessing == true || !this.state.data) {
+      return (
+        <View style={styles.isloading}>
+          <ActivityIndicator size="large" color="#e7ffe6" />
+        </View>
+      );
+    }
+  };
   handleOnSearch() {
+    this.props.reloadlist();
+    this.setState({ isloading: true });
     const item = {};
     var {
       name,
@@ -95,6 +131,7 @@ class FilterMembers extends Component {
       crffnNumber,
       gsmnumber
     } = this.state;
+
     item.name = name;
     item.category = parseInt(category, 10);
     item.gsmnumber = gsmnumber;
@@ -107,8 +144,6 @@ class FilterMembers extends Component {
     this.setState({
       filtereddata: this.props.filteredlist
     });
-
-    // console.log(this.props.filteredlist);
   }
   handleOnAdd(item) {
     this.props.mapDispatchToProps(item);
@@ -179,144 +214,194 @@ class FilterMembers extends Component {
       StatusBar.setBackgroundColor("#04920b", true);
       StatusBar.setTranslucent(true);
     }
-    if (this.state.isprocessing == true || !this.state.data)
-      return <ActivityIndicator size="large" color="#0000ff" />;
 
     return (
-      <Container style={styles.container}>
-        <Header androidStatusBarColor={"#04920b"} style={styles.header}>
-          <Left style={styles.left}></Left>
-          <Body style={styles.body}>
-            <Text style={styles.textTitle}>Search Practitioner</Text>
-          </Body>
-          <Right style={styles.right}>
-            <TouchableOpacity
-              onPress={() => this.viewSelectedMembers()}
-              style={styles.backArrow}
-            >
-              <Text
-                style={{
-                  position: "absolute",
-                  backgroundColor: "rgba(11,142,20,0.8)",
-                  color: "white",
-                  height: 30,
-                  width: 30,
-                  borderRadius: 15,
-                  right: 15,
-                  alignItems: "center",
-                  justifyContent: "center",
-                  zIndex: 2000
-                }}
-              >
-                {this.props.selectedmembers.length}
-              </Text>
+      <View>
+        <View>{this.isloading()}</View>
 
-              <Ionicons name="ios-person" size={30} color="#ffffff" />
-            </TouchableOpacity>
-          </Right>
-        </Header>
-        <View style={styles.container}>
-          <View style={styles.view2}>
-            <ImageBackground source={Images.bghome} style={styles.view4}>
-              <Item underline style={styles.itememail}>
-                <SimpleLineIcons name="user" color="#c9b0c1" size={17} />
-                <Picker
-                  selectedValue={this.state.category}
-                  style={styles.inputemail}
-                  onValueChange={(category, itemIndex) =>
-                    this.setState({ category: category })
-                  }
+        <Container
+          style={
+            this.state.isprocessing == true || !this.state.data
+              ? styles.container2
+              : styles.container
+          }
+        >
+          <Header androidStatusBarColor={"#04920b"} style={styles.header}>
+            <Left style={styles.left}></Left>
+            <Body style={styles.body}>
+              <Text style={styles.textTitle}>Search Practitioner</Text>
+            </Body>
+            <Right style={styles.right}>
+              <TouchableOpacity
+                onPress={() => this.viewSelectedMembers()}
+                style={styles.backArrow}
+              >
+                <Text
+                  style={{
+                    position: "absolute",
+                    backgroundColor: "rgba(11,142,20,0.8)",
+                    color: "white",
+                    height: 30,
+                    width: 30,
+                    borderRadius: 15,
+                    right: 15,
+                    alignItems: "center",
+                    justifyContent: "center",
+                    zIndex: 2000
+                  }}
                 >
-                  <Picker.Item
-                    style={{ color: "#e3e3e3" }}
-                    label="--Select Category--"
-                    value=""
-                  />
-                  <Picker.Item label="Individual" value="1" />
-                  <Picker.Item label="Company" value="2" />
-                </Picker>
-              </Item>
-              <Item underline style={styles.itememail}>
-                <SimpleLineIcons name="user" color="#c9b0c1" size={17} />
-                <Input
-                  placeholderTextColor={Colors.hintblue}
-                  textAlign={I18nManager.isRTL ? "right" : "left"}
-                  placeholder="Full Name"
-                  style={styles.inputemail}
-                  onChangeText={name => this.setState({ name })}
-                />
-              </Item>
-              <Item underline style={styles.itememail}>
-                <MaterialIcons name="mail-outline" color="#c9b0c1" size={17} />
-                <Input
-                  placeholderTextColor={Colors.hintblue}
-                  textAlign={I18nManager.isRTL ? "right" : "left"}
-                  placeholder="Email"
-                  onChangeText={email => this.setState({ email })}
-                  style={styles.inputemail}
-                />
-              </Item>
-              <Item underline style={styles.itememail}>
-                <SimpleLineIcons name="lock-open" color="#c9b0c1" size={17} />
-                <Input
-                  placeholderTextColor={Colors.hintblue}
-                  textAlign={I18nManager.isRTL ? "right" : "left"}
-                  placeholder="GSM Number"
-                  onChangeText={gsmnumber => this.setState({ gsmnumber })}
-                  style={styles.inputemail}
-                />
-              </Item>
-            </ImageBackground>
-          </View>
-          <TouchableOpacity
-            info
-            style={styles.buttondialogsignup}
-            onPress={() => this.handleOnSearch()}
+                  {this.props.selectedmembers.length}
+                </Text>
+
+                <Ionicons name="ios-person" size={30} color="#ffffff" />
+              </TouchableOpacity>
+            </Right>
+          </Header>
+          <View
+            style={
+              this.state.isprocessing == true || !this.state.data
+                ? styles.container2
+                : styles.container
+            }
           >
-            <Text autoCapitalize="words" style={styles.buttonsignin}>
-              Search
-            </Text>
-          </TouchableOpacity>
-          <View>
-            <ScrollView>
-              {this.state.filtereddata.length !== 0 ||
-              this.props.filteredlist !== undefined ||
-              this.props.filteredlist !== null
-                ? this.props.filteredlist.map((item, index) => {
+            <View style={{ flex: 1 }}>
+              <View style={styles.view2}>
+                <ImageBackground source={Images.bghome} style={styles.view4}>
+                  <Item underline style={styles.itememail}>
+                    <SimpleLineIcons name="user" color="#c9b0c1" size={17} />
+                    <Picker
+                      selectedValue={this.state.category}
+                      style={styles.inputemail}
+                      onValueChange={(category, itemIndex) =>
+                        this.setState({ category: category })
+                      }
+                    >
+                      <Picker.Item
+                        style={{ color: "#e3e3e3" }}
+                        label="--Select Category--"
+                        value=""
+                      />
+                      <Picker.Item label="Individual" value="1" />
+                      <Picker.Item label="Company" value="2" />
+                    </Picker>
+                  </Item>
+                  <Item underline style={styles.itememail}>
+                    <SimpleLineIcons name="user" color="#c9b0c1" size={17} />
+                    <Input
+                      placeholderTextColor={Colors.hintblue}
+                      textAlign={I18nManager.isRTL ? "right" : "left"}
+                      placeholder="Full Name"
+                      style={styles.inputemail}
+                      onChangeText={name => this.setState({ name })}
+                    />
+                  </Item>
+                  <Item underline style={styles.itememail}>
+                    <MaterialIcons
+                      name="mail-outline"
+                      color="#c9b0c1"
+                      size={17}
+                    />
+                    <Input
+                      placeholderTextColor={Colors.hintblue}
+                      textAlign={I18nManager.isRTL ? "right" : "left"}
+                      placeholder="Email"
+                      onChangeText={email => this.setState({ email })}
+                      style={styles.inputemail}
+                    />
+                  </Item>
+                  <Item underline style={styles.itememail}>
+                    <SimpleLineIcons
+                      name="lock-open"
+                      color="#c9b0c1"
+                      size={17}
+                    />
+                    <Input
+                      placeholderTextColor={Colors.hintblue}
+                      textAlign={I18nManager.isRTL ? "right" : "left"}
+                      placeholder="GSM Number"
+                      onChangeText={gsmnumber => this.setState({ gsmnumber })}
+                      style={styles.inputemail}
+                    />
+                  </Item>
+                </ImageBackground>
+              </View>
+              <TouchableOpacity
+                info
+                style={styles.buttondialogsignup}
+                onPress={() => this.handleOnSearch()}
+              >
+                <Text autoCapitalize="words" style={styles.buttonsignin}>
+                  Search
+                </Text>
+              </TouchableOpacity>
+            </View>
+
+            <View>
+              <View>{this.loadingList()}</View>
+
+              <ScrollView>
+                {this.state.filtereddata.length !== 0 ||
+                this.props.filteredlist !== undefined ||
+                this.props.filteredlist !== null ? (
+                  this.props.filteredlist.map((item, index) => {
                     return (
-                      <View style={styles.rowBg} key={index}>
-                        <View style={styles.rowView}>
-                          <Image
-                            source={{ uri: item.picture }}
-                            style={styles.profileImg}
-                          />
-                          <View style={styles.namePostView}>
+                      <List key={index} style={styles.listItems}>
+                        <ListItem thumbnail>
+                          <Left>
+                            <Thumbnail
+                              source={
+                                item.picture == "data:image/png;base64,"
+                                  ? Images.noavatar
+                                  : { uri: item.picture }
+                              }
+                            />
+                          </Left>
+                          <Body>
                             <Text style={styles.rowNameTxt}>{item.name}</Text>
-                          </View>
-                          <View style={{ justifyContent: "center" }}>
+                            <Text note numberOfLines={1}>
+                              {item.email == null
+                                ? "no emails provided"
+                                : item.email}
+                            </Text>
+                            <Text
+                              style={{ color: "#41c21d" }}
+                              note
+                              numberOfLines={1}
+                            >
+                              {item.gsmnumber == null
+                                ? "no phone contact provided"
+                                : item.gsmnumber}
+                            </Text>
+                          </Body>
+                          <Right>
                             <TouchableOpacity
                               style={styles.followBgSelected}
                               onPress={() => this.handleOnAdd(item)}
                             >
                               <Text style={styles.followTxtSelected}>Add</Text>
                             </TouchableOpacity>
-                          </View>
-                        </View>
-                        <View
-                          style={
-                            index === this.state.data.length - 1
-                              ? null
-                              : styles.dividerHorizontal
-                          }
-                        />
-                      </View>
+                          </Right>
+                        </ListItem>
+                      </List>
                     );
                   })
-                : null}
-            </ScrollView>
+                ) : (
+                  <Text
+                    style={{
+                      alignItems: "center",
+                      textAlign: "center",
+                      fontSize: 17,
+                      marginTop: 50
+                    }}
+                  >
+                    Select Practitioners
+                  </Text>
+                )}
+              </ScrollView>
+            </View>
           </View>
-        </View>
-      </Container>
+        </Container>
+      </View>
     );
   }
 }
@@ -324,7 +409,8 @@ function mapStateToProps(state, props) {
   return {
     memberslist: state.members.memberslist,
     selectedmembers: state.selectedmembers.selectedmemberslist,
-    filteredlist: state.selectedmembers.filteredlist
+    filteredlist: state.selectedmembers.filteredlist,
+    errorMessage: state.selectedmembers.errorMessage
   };
 }
 
@@ -332,5 +418,5 @@ function mapStateToProps(state, props) {
 export default connect(
   mapStateToProps,
 
-  { mapDispatchToProps, loadMembersList, filterCriteria }
+  { mapDispatchToProps, loadMembersList, filterCriteria, reloadlist }
 )(FilterMembers);

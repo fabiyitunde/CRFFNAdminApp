@@ -91,7 +91,7 @@ export default class InvoiceDetails extends Component {
     });
 
     BackHandler.addEventListener("hardwareBackPress", function() {
-      that.props.navigation.goBack(null);
+      that.props.navigation.navigate("MemberDetails");
       return true;
     });
   }
@@ -116,6 +116,9 @@ export default class InvoiceDetails extends Component {
     }
   };
 
+  onBackClick() {
+    this.props.navigation.navigate("MemberDetails");
+  }
   _handleBagNavigation() {
     AsyncStorage.multiSet([["ArrivedFrom", "ECommerceProductDetailsTab"]]);
     this.props.navigation.navigate("ECommerceMyBag");
@@ -144,13 +147,11 @@ export default class InvoiceDetails extends Component {
           <Left style={styles.left}>
             <TouchableOpacity
               style={styles.backArrow}
-              onPress={() =>
-                this.props.navigation.navigate("ECommerceProductDetails")
-              }
+              onPress={this.onBackClick.bind(this)}
             >
               <FontAwesome
                 name={I18nManager.isRTL ? "angle-right" : "angle-left"}
-                size={Fonts.moderateScale(30)}
+                size={30}
                 color="white"
                 style={{ paddingRight: 20 }}
               />
@@ -159,46 +160,7 @@ export default class InvoiceDetails extends Component {
           <Body style={styles.body}>
             <Text style={styles.textTitle}>Invoice Details</Text>
           </Body>
-          <Right style={styles.right}>
-            {ArrivedForProductDetailsTab ==
-            "ECommerceProductDetailsWishList" ? null : (
-              <TouchableOpacity
-                style={{ flexDirection: "row" }}
-                onPress={() => this._handleWishListNavigation()}
-              >
-                <View style={styles.heartBg}>
-                  <FontAwesome
-                    name="heart"
-                    size={Fonts.moderateScale(8)}
-                    style={styles.heartIcon}
-                  />
-                </View>
-                {this.state.favoriteNotification != 0 ? (
-                  <View style={styles.alertBg}>
-                    <Text style={styles.alertTxt}>1</Text>
-                  </View>
-                ) : null}
-              </TouchableOpacity>
-            )}
-            {ArrivedForProductDetailsTab ==
-            "ECommerceProductDetailsMyBag" ? null : (
-              <TouchableOpacity
-                style={{ flexDirection: "row" }}
-                onPress={() => this._handleBagNavigation()}
-              >
-                <SimpleLineIcons
-                  name="handbag"
-                  size={Fonts.moderateScale(18)}
-                  style={styles.bagIcon}
-                />
-                {this.state.cartNotification != 0 ? (
-                  <View style={styles.alertBg}>
-                    <Text style={styles.alertTxt}>3</Text>
-                  </View>
-                ) : null}
-              </TouchableOpacity>
-            )}
-          </Right>
+          <Right style={styles.right}></Right>
         </Header>
         <KeyboardAwareScrollView>
           <View style={styles.content}>

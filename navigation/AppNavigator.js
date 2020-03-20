@@ -9,6 +9,7 @@ import Home from "../components/home/home";
 import Invoicelist from "../components/invoicelist/invoicelist";
 import FilterMembers from "../components/filtermembers/filtermembers";
 import ControlPanel from "../components/home/ControlPanel";
+import NFCScanner from "../components/nfcscanner/nfcscanner";
 import Login from "../components/login/login";
 import AuthLoading from "../components/authloading";
 import MemberDetails from "../components/memberdetails/memberdetails";
@@ -21,6 +22,7 @@ import InvoiceItem from "../components/invoiceitem/invoiceitem";
 import MemberItem from "../components/memberitem/memberitem";
 import SelectedMembersList from "../components/selectedmemberslist/selectedmemberslist";
 import MessageHome from "../components/message/message";
+import Dashboard from "../components/dashboard/dashboard";
 
 const DrawerStack = createDrawerNavigator(
   {
@@ -41,7 +43,9 @@ const AppStack = createStackNavigator(
     ScannedInvoiceDetails: ScannedInvoiceDetails,
     ScannedIDDetails: ScannedIDDetails,
     Home: Home,
+    Dashboard: Dashboard,
     QRCodeScanner: QRCodeScanner,
+    NFCScanner: NFCScanner,
     Invoicelist: Invoicelist,
     InvoiceItem: InvoiceItem,
     FilterMembers: FilterMembers,

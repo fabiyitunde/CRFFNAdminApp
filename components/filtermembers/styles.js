@@ -3,9 +3,39 @@ import { Fonts, Metrics, Colors } from "../../Themes/";
 
 const styles = StyleSheet.create({
   container: {
+    height: "auto",
+    width: Metrics.WIDTH,
+
+    backgroundColor: Colors.transparent
+  },
+  container2: {
+    width: Metrics.WIDTH,
+
+    backgroundColor: Colors.transparent
+  },
+  dividerHorizontal: {
+    marginTop: 10,
+    height: Metrics.HEIGHT * 0.001,
+    backgroundColor: "#e1e1e1",
+    marginLeft: Metrics.WIDTH * 0.045,
+    marginRight: Metrics.WIDTH * 0.045
+  },
+
+  isloading: {
+    position: "absolute",
     height: Metrics.HEIGHT,
     width: Metrics.WIDTH,
-    backgroundColor: Colors.transparent
+    zIndex: 10,
+    backgroundColor: "rgba(0, 0, 0, 0.7)",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  errortext: {
+    textAlign: "center",
+    fontSize: Fonts.moderateScale(16),
+    color: Colors.fire,
+
+    fontFamily: Fonts.type.sfuiDisplayRegular
   },
 
   left: {
@@ -145,13 +175,6 @@ const styles = StyleSheet.create({
     textAlign: "left"
   },
 
-  dividerHorizontal: {
-    height: Metrics.HEIGHT * 0.001,
-    backgroundColor: "#e1e1e1",
-    marginLeft: Metrics.WIDTH * 0.045,
-    marginRight: Metrics.WIDTH * 0.045
-  },
-
   changePasswordView: {
     marginTop: Metrics.HEIGHT * 0.025,
     marginLeft: Metrics.WIDTH * 0.045
@@ -243,7 +266,7 @@ const styles = StyleSheet.create({
   buttondialogsignup: {
     backgroundColor: Colors.loginGreen,
     alignSelf: "center",
-    //marginTop: Metrics.HEIGHT * -,
+
     borderRadius: 40,
     width: Metrics.WIDTH * 0.65,
     height: Metrics.HEIGHT * 0.07,
@@ -342,9 +365,10 @@ const styles = StyleSheet.create({
     color: "#6f6f6f",
     fontSize: Fonts.moderateScale(16),
     fontFamily: Fonts.type.sfuiDisplayMedium,
-    textAlign: "left"
+    textAlign: "left",
+    textTransform: "capitalize"
   },
-
+  listItems: { paddingBottom: Metrics.WIDTH * 0.02 },
   rowDesignationTxt: {
     color: "#b7b7b7",
     fontSize: Fonts.moderateScale(13),

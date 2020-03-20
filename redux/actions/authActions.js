@@ -1,5 +1,5 @@
 import * as firebase from "firebase";
-import { LOGIN, LOGOUT } from "../actionTypes";
+import { LOGIN, LOGOUT, RELOADLOGIN } from "../actionTypes";
 import { getaxious } from "../../services/axiosService";
 import {
   ActivityIndicator,
@@ -29,7 +29,8 @@ export const loginuser = (username, password, successcallback) => dispatch => {
     password
   };
   const body = encodeParams(data);
-  // console.log(`${url} ${body}`);
+
+  console.log(`${url} ${body}`);
   const axios = getaxious();
   const request = axios.post("/token", body);
   request
@@ -42,12 +43,16 @@ export const loginuser = (username, password, successcallback) => dispatch => {
         access_token: response.data.access_token
       };
       console.log(logindetail.access_token);
-      dispatch({ type: LOGIN, logininfo: logindetail });
+
       successcallback();
+      dispatch({ type: LOGIN, logininfo: logindetail });
     })
     .catch(error => {
-      console.log(`this is the error --- ${error}`);
+      dispatch({ type: LOGIN, errorMessage: error });
     });
+};
+export const reloadlogin = () => dispatch => {
+  dispatch({ type: RELOADLOGIN });
 };
 export const loadloginuserInfo = () => dispatch => {
   (async () => {

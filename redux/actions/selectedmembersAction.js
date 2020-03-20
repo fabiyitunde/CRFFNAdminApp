@@ -1,4 +1,10 @@
-import { ADD_TO_LIST, REMOVE_FROM_LIST, FILTER_RESULT } from "../actionTypes";
+import {
+  ADD_TO_LIST,
+  REMOVE_FROM_LIST,
+  FILTER_RESULT,
+  RELOADLIST,
+  ERROR_MESSAGE
+} from "../actionTypes";
 import * as firebase from "firebase";
 import {
   getauthorizationheaderconfig,
@@ -11,6 +17,9 @@ export const mapDispatchToProps = selectedmember => dispatch => {
 };
 export const removeItemFromProps = selectedmember => dispatch => {
   dispatch({ type: REMOVE_FROM_LIST, payload: selectedmember });
+};
+export const reloadlist = () => dispatch => {
+  dispatch({ type: RELOADLIST });
 };
 export const filterCriteria = data => dispatch => {
   const axios = getaxious();
@@ -26,16 +35,17 @@ export const filterCriteria = data => dispatch => {
         response.data.forEach(function(element) {
           responselist.push(element);
         });
-        console.log();
-        //  console.log(`this is the response --- ${responseDecoded}`);
+
         dispatch({
           type: FILTER_RESULT,
           filteredlist: responselist
         });
-        console.log(filteredlist);
       })
       .catch(error => {
-        console.log(`this is the error --- ${error}`);
+        dispatch({
+          type: ERROR_MESSAGE,
+          errorMessage: error
+        });
       });
   });
 };

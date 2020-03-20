@@ -1,4 +1,5 @@
-import { Platform, StyleSheet, Dimensions } from "react-native";
+import { Platform, StyleSheet, Dimensions, I18nManager } from "react-native";
+const deviceScreen = require("Dimensions").get("window");
 import { Fonts, Metrics, Colors } from "../../Themes/";
 
 const styles = StyleSheet.create({
@@ -8,15 +9,58 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.transparent,
     flexDirection: "column"
   },
-
   header: {
-    backgroundColor: Colors.snow,
-    height: Metrics.HEIGHT * 0.1,
-    width: Metrics.WIDTH,
+    backgroundColor: "#181818",
+    height: Metrics.HEIGHT * 0.12,
+    borderBottomWidth: 0,
+    paddingTop: Metrics.HEIGHT * 0.03,
+    elevation: 0,
+    paddingLeft: Metrics.WIDTH * 0.05,
+    paddingRight: Metrics.WIDTH * 0.05
+  },
+  columnone: {
+    width: Metrics.WIDTH * 0.5,
+    alignSelf: "center",
+    height: Metrics.HEIGHT * 0.3,
+    padding: Metrics.HEIGHT * 0.03,
+    justifyContent: "center"
+  },
+  icon: {
+    alignSelf: "center",
+    justifyContent: "center",
+    fontSize: 50,
+    color: "white"
+  },
+  iconDescription: {
+    alignSelf: "center",
+    justifyContent: "center",
+    color: "white",
+    fontSize: 16
+  },
+  box: {
+    alignSelf: "center",
+    justifyContent: "center",
+    borderStyle: "solid",
+    borderColor: "white",
+    borderWidth: 2,
+    width: Metrics.WIDTH * 0.3,
+    paddingBottom: 8,
+    paddingTop: 8
+  },
+  rowView: {
     flexDirection: "row",
-    borderBottomColor: Colors.snow,
-    justifyContent: "space-between",
-    paddingTop: Metrics.HEIGHT * 0.045
+    marginBottom: Metrics.HEIGHT * 0.015
+  },
+  columntwo: {
+    padding: Metrics.HEIGHT * 0.03,
+    width: Metrics.WIDTH * 0.5,
+    alignSelf: "center",
+    height: Metrics.HEIGHT * 0.3,
+    justifyContent: "center"
+  },
+  imgContainer: {
+    width: Metrics.WIDTH,
+    height: Metrics.HEIGHT
   },
 
   titleTxt: {

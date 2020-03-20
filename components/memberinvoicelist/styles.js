@@ -7,6 +7,15 @@ const styles = StyleSheet.create({
     width: Metrics.WIDTH,
     backgroundColor: "#f3f3f3"
   },
+  isloading: {
+    position: "absolute",
+    height: Metrics.HEIGHT,
+    width: Metrics.WIDTH,
+    zIndex: 10,
+    backgroundColor: "rgba(0, 0, 0, 0.7)",
+    justifyContent: "center",
+    alignItems: "center"
+  },
 
   header: {
     backgroundColor: "#0e1130",
@@ -136,8 +145,20 @@ const styles = StyleSheet.create({
     textAlign: "left"
   },
 
+  fieldDescriptionTxt2: {
+    color: "#ffffff",
+    padding: Metrics.WIDTH * 0.015,
+    fontWeight: "bold",
+    fontSize: Fonts.moderateScale(15),
+    fontFamily: Fonts.type.helveticaNeueLight,
+    width: Metrics.WIDTH * 0.55,
+    marginLeft: Metrics.WIDTH * 0.03,
+    textAlign: "center",
+    backgroundColor: "#60c232"
+  },
   fieldDescriptionTxt: {
     color: "#111111",
+
     fontSize: Fonts.moderateScale(15),
     fontFamily: Fonts.type.helveticaNeueLight,
     width: Metrics.WIDTH * 0.55,

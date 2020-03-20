@@ -97,6 +97,15 @@ class MembersList extends Component {
 
     this.setState({ filtereddata: filteredlist });
   };
+  isloading = () => {
+    if (this.state.isprocessing == true || !this.state.data) {
+      return (
+        <View style={styles.isloading}>
+          <ActivityIndicator size="large" color="#e7ffe6" />
+        </View>
+      );
+    }
+  };
   transformDataForDisplay = serverdata => {
     const returndata = {
       id: Number(serverdata.Id),
@@ -115,63 +124,68 @@ class MembersList extends Component {
       StatusBar.setBackgroundColor("#2d324f", true);
       StatusBar.setTranslucent(true);
     }
-    if (this.state.isprocessing == true || !this.state.data)
-      return <ActivityIndicator size="large" color="#0000ff" />;
     return (
-      <ScrollView>
-        <View androidStatusBarColor={"#0e1130"} style={styles.header}>
-          <SearchBar
-            style={styles.searcbarstyle}
-            round //To make the searchbar corner round (default square)
-            searchIcon={{ size: 24 }} //Size of the search icon
-            onChangeText={text => this.SearchFilterFunction(text)}
-            onClear={text => this.SearchFilterFunction("")}
-            placeholder="Member Search..."
-            value={this.state.searchtext}
-          />
-        </View>
+      <View
+        style={
+          this.state.isprocessing == true ? styles.container2 : styles.container
+        }
+      >
+        <View>{this.isloading()}</View>
+        <ScrollView>
+          <View androidStatusBarColor={"#0e1130"} style={styles.header}>
+            <SearchBar
+              style={styles.searcbarstyle}
+              round //To make the searchbar corner round (default square)
+              searchIcon={{ size: 24 }} //Size of the search icon
+              onChangeText={text => this.SearchFilterFunction(text)}
+              onClear={text => this.SearchFilterFunction("")}
+              placeholder="Member Search..."
+              value={this.state.searchtext}
+            />
+          </View>
 
-        <View
-          style={styles.listMainView}
-          animation="zoomInDown"
-          duration={1100}
-          delay={1400}
-        >
-          {this.state.filtereddata.map((serveritem, index) => {
-            const item = this.transformDataForDisplay(serveritem);
+          <View
+            style={styles.listMainView}
+            animation="zoomInDown"
+            duration={1100}
+            delay={1400}
+          >
+            {this.state.filtereddata.map((serveritem, index) => {
+              const item = this.transformDataForDisplay(serveritem);
 
-            return (
-              <View style={styles.rowBg} key={index}>
-                <View style={styles.rowView}>
-                  <Image
-                    source={{ uri: item.profileImage }}
-                    style={styles.profileImg}
+              return (
+                <View style={styles.rowBg} key={index}>
+                  <View style={styles.rowView}>
+                    <Image
+                      source={{ uri: item.profileImage }}
+                      style={styles.profileImg}
+                    />
+                    <View style={styles.namePostView}>
+                      <Text style={styles.rowNameTxt}>{item.name}</Text>
+                      <Text style={styles.rowDesignationTxt}>{item.post}</Text>
+                    </View>
+                    <View style={{ justifyContent: "center" }}>
+                      <TouchableOpacity
+                        style={styles.followBgSelected}
+                        onPress={() => this.handleOnViewDetail(item)}
+                      >
+                        <Text style={styles.followTxtSelected}>Details</Text>
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                  <View
+                    style={
+                      index === this.state.data.length - 1
+                        ? null
+                        : styles.dividerHorizontal
+                    }
                   />
-                  <View style={styles.namePostView}>
-                    <Text style={styles.rowNameTxt}>{item.name}</Text>
-                    <Text style={styles.rowDesignationTxt}>{item.post}</Text>
-                  </View>
-                  <View style={{ justifyContent: "center" }}>
-                    <TouchableOpacity
-                      style={styles.followBgSelected}
-                      onPress={() => this.handleOnViewDetail(item)}
-                    >
-                      <Text style={styles.followTxtSelected}>Details</Text>
-                    </TouchableOpacity>
-                  </View>
                 </View>
-                <View
-                  style={
-                    index === this.state.data.length - 1
-                      ? null
-                      : styles.dividerHorizontal
-                  }
-                />
-              </View>
-            );
-          })}
-        </View>
-      </ScrollView>
+              );
+            })}
+          </View>
+        </ScrollView>
+      </View>
     );
   }
   _fnChangeItem(listId) {
@@ -217,7 +231,4 @@ function mapStateToProps(state, props) {
 }
 
 //Connect everything
-export default connect(
-  mapStateToProps,
-  { loadMembersList }
-)(MembersList);
+export default connect(mapStateToProps, { loadMembersList })(MembersList);

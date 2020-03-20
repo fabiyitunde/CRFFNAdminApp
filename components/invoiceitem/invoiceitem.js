@@ -167,7 +167,7 @@ class InvoiceItem extends Component {
           tabBarTextStyle={styles.tabText}
           renderTabBar={() => <ScrollableTabBar />}
         >
-          <View tabLabel="Details">
+          <View tabLabel="Invoice Detail">
             <View style={styles.mainView}>
               <ScrollView>
                 <ImageBackground

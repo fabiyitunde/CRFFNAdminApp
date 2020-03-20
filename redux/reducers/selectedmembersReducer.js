@@ -1,8 +1,9 @@
 import selectedmemberslist from "../../components/selectedmemberslist/selectedmemberslist";
-import { FILTER_RESULT } from "../actionTypes";
+import { FILTER_RESULT, RELOADLIST, ERROR_MESSAGE } from "../actionTypes";
 const initialState = {
   selectedmemberslist: [],
-  filteredlist: []
+  filteredlist: [],
+  errorMessage: ""
 };
 export default function(state = initialState, action) {
   var selectedlist = [...state.selectedmemberslist];
@@ -26,6 +27,17 @@ export default function(state = initialState, action) {
       //  var processedlist = JSON.stringify(action.filteredlist);
       var processedlist = action.filteredlist;
       return { ...state, filteredlist: processedlist };
+    case RELOADLIST:
+      return {
+        ...state,
+        filteredlist: initialState.filteredlist,
+        errorMessage: initialState.errorMessage
+      };
+    case ERROR_MESSAGE:
+      return {
+        ...state,
+        errorMessage: action.errorMessage
+      };
     case "REMOVE_FROM_LIST":
       var copyoflist = [...state.selectedmemberslist];
       var newlist = copyoflist.filter(

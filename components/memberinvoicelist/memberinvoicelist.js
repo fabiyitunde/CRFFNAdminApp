@@ -82,11 +82,16 @@ class MemberInvoiceList extends Component {
       StatusBar.setTranslucent(true);
     }
     if (this.state.isprocessing == true || !this.state.data)
-      return <ActivityIndicator size="large" color="#0000ff" />;
+      return (
+        <View style={styles.isloading}>
+          <ActivityIndicator size="large" color="#e7ffe6" />
+        </View>
+      );
     return (
       <ScrollView>
         {this.state.data.map((serveritem, index) => {
           const item = this.transformDataForDisplay(serveritem);
+          console.log(item);
           return (
             <TouchableOpacity
               onPress={() =>
@@ -98,48 +103,65 @@ class MemberInvoiceList extends Component {
             >
               <View
                 style={
-                  item.id === 1
+                  (item.id === 1
                     ? [styles.rowBg, { marginTop: Metrics.WIDTH * 0.05 }]
-                    : styles.rowBg
+                    : styles.rowBg,
+                  { backgroundColor: "#e3e3e3" })
                 }
               >
-                <View style={styles.rowField}>
-                  <Text style={styles.fieldLabelTxt}>Type</Text>
-                  <Text style={styles.fieldDescriptionTxt}>{item.OrderID}</Text>
-                </View>
-                <View style={styles.rowListDivider} />
+                <View
+                  style={{
+                    backgroundColor: "#ffffff",
+                    margin: 12,
+                    borderRadius: 5
+                  }}
+                >
+                  <View style={styles.rowField}>
+                    <Text style={styles.fieldLabelTxt}>Type</Text>
+                    <Text style={styles.fieldDescriptionTxt2}>
+                      {item.OrderID}
+                    </Text>
+                  </View>
+                  <View style={styles.rowListDivider} />
 
-                <View style={styles.rowField}>
-                  <Text style={styles.fieldLabelTxt}>Date</Text>
-                  <Text style={styles.fieldDescriptionTxt}>{item.Date}</Text>
-                </View>
-                <View style={styles.rowListDivider} />
+                  <View style={styles.rowField}>
+                    <Text style={styles.fieldLabelTxt}>Date</Text>
+                    <Text style={styles.fieldDescriptionTxt}>{item.Date}</Text>
+                  </View>
+                  <View style={styles.rowListDivider} />
 
-                <View style={styles.rowField}>
-                  <Text style={styles.fieldLabelTxt}>Narration</Text>
-                  <Text numberOfLines={1} style={styles.fieldDescriptionTxt}>
-                    {item.Product}
-                  </Text>
-                </View>
-                <View style={styles.rowListDivider} />
+                  <View style={styles.rowField}>
+                    <Text style={styles.fieldLabelTxt}>Narration</Text>
+                    <Text numberOfLines={1} style={styles.fieldDescriptionTxt}>
+                      {item.Product}
+                    </Text>
+                  </View>
+                  <View style={styles.rowListDivider} />
 
-                <View style={styles.rowField}>
-                  <Text style={styles.fieldLabelTxt}>Amount</Text>
-                  <Text style={styles.fieldDescriptionTxt}>{item.Price}</Text>
-                </View>
-                <View style={styles.rowListDivider} />
+                  <View style={styles.rowField}>
+                    <Text style={styles.fieldLabelTxt}>Amount</Text>
+                    <Text style={styles.fieldDescriptionTxt}>{item.Price}</Text>
+                  </View>
+                  <View style={styles.rowListDivider} />
 
-                <View style={styles.rowField}>
-                  <Text style={styles.fieldLabelTxt}>Status</Text>
-                  <Text
-                    style={
-                      item.Status == "Complete"
-                        ? [styles.fieldDescriptionTxt, { color: "#ffc700" }]
-                        : [styles.fieldDescriptionTxt, { color: "#ff0000" }]
-                    }
-                  >
-                    {item.Status}
-                  </Text>
+                  <View style={styles.rowField}>
+                    <Text style={styles.fieldLabelTxt}>Status</Text>
+                    <Text
+                      style={
+                        item.Status == "Paid"
+                          ? [
+                              styles.fieldDescriptionTxt,
+                              { color: "#00ff22", fontWeight: "bold" }
+                            ]
+                          : [
+                              styles.fieldDescriptionTxt,
+                              { color: "#ff0000", fontWeight: "bold" }
+                            ]
+                      }
+                    >
+                      {item.Status}
+                    </Text>
+                  </View>
                 </View>
               </View>
             </TouchableOpacity>
@@ -156,7 +178,6 @@ function mapStateToProps(state, props) {
 }
 
 //Connect everything
-export default connect(
-  mapStateToProps,
-  { loadMemberInvoiceList }
-)(MemberInvoiceList);
+export default connect(mapStateToProps, { loadMemberInvoiceList })(
+  MemberInvoiceList
+);

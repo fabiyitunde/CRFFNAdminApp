@@ -94,65 +94,90 @@ class MemberDetails extends Component {
         </Header>
         <ScrollableTabView
           initialPage={0}
-          tabBarBackgroundColor={"white"}
-          tabBarActiveTextColor={"#04920b"}
-          tabBarInactiveTextColor={"#789079"}
-          tabBarUnderlineStyle={{ backgroundColor: "#036408" }}
+          tabBarBackgroundColor={"#181818"}
+          tabBarActiveTextColor={"#04de0f"}
+          tabBarInactiveTextColor={"#a1cfa3"}
+          tabBarUnderlineStyle={{ backgroundColor: "#04de0f" }}
           renderTabBar={() => <ScrollableTabBar />}
         >
           <View tabLabel="Details">
             <View style={styles.mainView}>
               <ImageBackground
-                source={Images.bghome}
-                style={{ width: "100%", height: "50%" }}
+                source={Images.loginbg}
+                style={{ width: "100%", height: "100%" }}
               >
-                <View style={styles.mainRow}>
-                  <Image
-                    source={{ uri: selectedmember.picturestring }}
-                    style={styles.profileImg}
-                  />
-                  <View style={styles.infoRow}>
-                    <Text style={[styles.labelHeaderText]}>
-                      {selectedmember.CustomerName}
-                    </Text>
+                <ImageBackground
+                  source={Images.bghome}
+                  style={{ width: "100%", height: "50%" }}
+                >
+                  <View style={styles.mainRow}>
+                    <Image
+                      source={{ uri: selectedmember.picturestring }}
+                      style={styles.profileImg}
+                    />
+                    <View style={styles.infoRow}>
+                      <Text style={[styles.labelHeaderText]}>
+                        {selectedmember.CustomerName}
+                      </Text>
+                    </View>
+                    <View style={styles.infoRow}></View>
                   </View>
-                  <View style={styles.infoRow}></View>
+                </ImageBackground>
+                <View style={styles.secondRow}>
+                  <ImageBackground
+                    source={Images.listBackground}
+                    style={{ width: "100%" }}
+                  >
+                    <View style={styles.mainRow}>
+                      <Text style={styles.labelText}>CRFFN Number</Text>
+                      <Text style={[styles.infoText, { color: "#00e74c" }]}>
+                        {selectedmember.MembershipNumber}
+                      </Text>
+                    </View>
+                  </ImageBackground>
+                  <View style={styles.dividerHorizontal} />
+                  <View style={styles.dividerHorizontal} />
+                  <ImageBackground
+                    source={Images.listBackground}
+                    style={{ width: "100%" }}
+                  >
+                    <View style={styles.mainRow}>
+                      <Text style={styles.labelText}>Email</Text>
+                      <Text style={[styles.infoText, { color: "#ffffff" }]}>
+                        {selectedmember.RegistrationUserEmail}
+                      </Text>
+                    </View>
+                  </ImageBackground>
+                  <View style={styles.dividerHorizontal} />
+                  <ImageBackground
+                    source={Images.listBackground}
+                    style={{ width: "100%" }}
+                  >
+                    <View style={styles.mainRow}>
+                      <Text style={styles.labelText}>Category</Text>
+                      <Text style={[styles.infoText, { color: "#ffffff" }]}>
+                        {selectedmember.FreightForwaderCategoryDescr}
+                      </Text>
+                    </View>
+                  </ImageBackground>
+                  <View style={styles.dividerHorizontal} />
+                  <ImageBackground
+                    source={Images.listBackground}
+                    style={{ width: "100%" }}
+                  >
+                    <View style={styles.mainRow}>
+                      <Text style={styles.labelText}>Phone Number</Text>
+                      <Text style={[styles.infoText, { color: "#ffffff" }]}>
+                        {selectedmember.CorrespondenceGSM}
+                      </Text>
+                    </View>
+                  </ImageBackground>
+                  <View style={styles.dividerHorizontal} />
                 </View>
               </ImageBackground>
-              <View style={styles.secondRow}>
-                <View style={styles.mainRow}>
-                  <Text style={styles.labelText}>CRFFN Number</Text>
-                  <Text style={[styles.infoText, { color: "#04920b" }]}>
-                    {selectedmember.MembershipNumber}
-                  </Text>
-                </View>
-                <View style={styles.dividerHorizontal} />
-                <View style={styles.dividerHorizontal} />
-                <View style={styles.mainRow}>
-                  <Text style={styles.labelText}>Email</Text>
-                  <Text style={[styles.infoText, { color: "#0e1130" }]}>
-                    {selectedmember.RegistrationUserEmail}
-                  </Text>
-                </View>
-                <View style={styles.dividerHorizontal} />
-                <View style={styles.mainRow}>
-                  <Text style={styles.labelText}>Category</Text>
-                  <Text style={[styles.infoText, { color: "#0e1130" }]}>
-                    {selectedmember.FreightForwaderCategoryDescr}
-                  </Text>
-                </View>
-                <View style={styles.dividerHorizontal} />
-                <View style={styles.mainRow}>
-                  <Text style={styles.labelText}>PhoneNumber</Text>
-                  <Text style={[styles.infoText, { color: "#0e1130" }]}>
-                    {selectedmember.CorrespondenceGSM}
-                  </Text>
-                </View>
-                <View style={styles.dividerHorizontal} />
-              </View>
             </View>
           </View>
-          <View tabLabel="InvoiceList">
+          <View tabLabel="Invoice List">
             <MemberInvoiceList
               crffnmasterid={crffnmasterid}
               navigation={this.props.navigation}
@@ -170,7 +195,4 @@ function mapStateToProps(state, props) {
 }
 
 //Connect everything
-export default connect(
-  mapStateToProps,
-  {}
-)(MemberDetails);
+export default connect(mapStateToProps, {})(MemberDetails);

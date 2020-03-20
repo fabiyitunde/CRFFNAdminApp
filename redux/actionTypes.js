@@ -8,3 +8,6 @@ export const LOAD_INVOICE_ITEM = "LOAD_INVOICE_ITEM";
 export const ADD_TO_LIST = "ADD_TO_LIST";
 export const REMOVE_FROM_LIST = "REMOVE_FROM_LIST";
 export const FILTER_RESULT = "FILTER_RESULT";
+export const RELOADLOGIN = "RELOADLOGIN";
+export const RELOADLIST = "RELOADLIST";
+export const ERROR_MESSAGE = "ERROR_MESSAGE";

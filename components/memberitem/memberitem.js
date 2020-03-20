@@ -9,7 +9,9 @@ import {
   BackHandler,
   I18nManager,
   AsyncStorage,
-  ScrollView
+  ImageBackground,
+  ScrollView,
+  ActivityIndicator
 } from "react-native";
 import {
   Content,
@@ -23,16 +25,20 @@ import {
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
 import styles from "./styles";
-
+import { loadMembersList } from "../../redux/actions/membersAction";
 import { connect } from "react-redux";
-
+import Images from "../../Themes/Images";
 import ScrollableTabView, {
   ScrollableTabBar
 } from "../../UIComponents/react-native-scrollable-tab-view";
 class MemberItem extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      isprocessing: false,
+      data: [],
+      selectedmember: {}
+    };
   }
 
   onChangePasswordClick() {
@@ -50,7 +56,17 @@ class MemberItem extends Component {
       return true;
     });
   }
-
+  componentDidMount() {
+    this.setState({ isprocessing: true });
+    this.props.loadMembersList(() => {
+      const crffnmasterid = this.props.crffnmasterid;
+      this.setState({
+        isprocessing: false,
+        data: this.props.memberslist,
+        selectedmember: this.props.memberslist.find(a => a.Id == crffnmasterid)
+      });
+    });
+  }
   _handleBagNavigation() {
     AsyncStorage.multiSet([["ArrivedFrom", "ECommerceMyInformation"]]);
     this.props.navigation.navigate("ECommerceMyBag");
@@ -67,65 +83,106 @@ class MemberItem extends Component {
       StatusBar.setBackgroundColor("#0e1130", true);
       StatusBar.setTranslucent(true);
     }
-    const { memberslist } = this.props;
-    const crffnmasterid = this.props.crffnmasterid;
-    const selectedmember = memberslist.find(a => a.Id == crffnmasterid);
+    //const { memberslist } = this.props;
+    const { selectedmember } = this.state;
+    // const crffnmasterid = this.props.crffnmasterid;
 
+    if (this.state.isprocessing == true) {
+      return (
+        <View style={styles.isloading}>
+          <ActivityIndicator size="large" color="#e7ffe6" />
+        </View>
+      );
+    }
     return (
       <Container style={styles.container}>
-        <View>
+        <View style={(style = styles.insideContainer)}>
           <View style={styles.mainView}>
-            <View style={styles.mainRow}>
-              <Image
-                source={{ uri: selectedmember.picturestring }}
-                style={styles.profileImg}
-              />
+            <ImageBackground
+              source={Images.userbg}
+              style={{ width: "100%", height: "100%" }}
+            >
+              <View style={styles.imageContent}>
+                <Image
+                  source={{ uri: selectedmember.picturestring }}
+                  style={styles.profileImg}
+                />
+              </View>
+            </ImageBackground>
+            <View>
+              <View style={styles.dividerHorizontal} />
+              <View style={styles.mainRow2}>
+                <ImageBackground
+                  source={Images.listbg}
+                  style={{ width: "100%" }}
+                >
+                  <View style={styles.mainRow}>
+                    <Text style={styles.labelText}>CRFFN Number</Text>
+                    <Text style={[styles.infoText, { color: "#83f8ff" }]}>
+                      {selectedmember.MembershipNumber}
+                    </Text>
+                  </View>
+                </ImageBackground>
+              </View>
+
+              <View style={styles.dividerHorizontal} />
+              <View style={styles.mainRow2}>
+                <ImageBackground
+                  source={Images.listbg}
+                  style={{ width: "100%" }}
+                >
+                  <View style={styles.mainRow}>
+                    <Text style={styles.labelText}>Name</Text>
+                    <Text style={[styles.infoText, { color: "#ffffff" }]}>
+                      {selectedmember.CustomerName}
+                    </Text>
+                  </View>
+                </ImageBackground>
+              </View>
+              <View style={styles.dividerHorizontal} />
+              <View style={styles.mainRow2}>
+                <ImageBackground
+                  source={Images.listbg}
+                  style={{ width: "100%" }}
+                >
+                  <View style={styles.mainRow}>
+                    <Text style={styles.labelText}>Email</Text>
+                    <Text style={[styles.infoText, { color: "#ffffff" }]}>
+                      {selectedmember.RegistrationUserEmail}
+                    </Text>
+                  </View>
+                </ImageBackground>
+              </View>
+              <View style={styles.dividerHorizontal} />
+              <View style={styles.mainRow2}>
+                <ImageBackground
+                  source={Images.listbg}
+                  style={{ width: "100%" }}
+                >
+                  <View style={styles.mainRow}>
+                    <Text style={styles.labelText}>Category</Text>
+                    <Text style={[styles.infoText, { color: "#ffffff" }]}>
+                      {selectedmember.FreightForwaderCategoryDescr}
+                    </Text>
+                  </View>
+                </ImageBackground>
+              </View>
+              <View style={styles.dividerHorizontal} />
+              <View style={styles.mainRow2}>
+                <ImageBackground
+                  source={Images.listbg}
+                  style={{ width: "100%" }}
+                >
+                  <View style={styles.mainRow}>
+                    <Text style={styles.labelText}>PhoneNumber</Text>
+                    <Text style={[styles.infoText, { color: "#ffffff" }]}>
+                      {selectedmember.CorrespondenceGSM}
+                    </Text>
+                  </View>
+                </ImageBackground>
+              </View>
+              <View style={styles.dividerHorizontal} />
             </View>
-            <View style={styles.dividerHorizontal} />
-            <View style={styles.mainRow}>
-              <Text style={styles.labelText}>CRFFN Number</Text>
-              <Text style={[styles.infoText, { color: "#0e1130" }]}>
-                {selectedmember.MembershipNumber}
-              </Text>
-            </View>
-
-            <View style={styles.dividerHorizontal} />
-
-            <View style={styles.mainRow}>
-              <Text style={styles.labelText}>Name</Text>
-              <Text style={[styles.infoText, { color: "#0e1130" }]}>
-                {selectedmember.CustomerName}
-              </Text>
-            </View>
-
-            <View style={styles.dividerHorizontal} />
-
-            <View style={styles.mainRow}>
-              <Text style={styles.labelText}>Email</Text>
-              <Text style={[styles.infoText, { color: "#0e1130" }]}>
-                {selectedmember.RegistrationUserEmail}
-              </Text>
-            </View>
-
-            <View style={styles.dividerHorizontal} />
-
-            <View style={styles.mainRow}>
-              <Text style={styles.labelText}>Category</Text>
-              <Text style={[styles.infoText, { color: "#0e1130" }]}>
-                {selectedmember.FreightForwaderCategoryDescr}
-              </Text>
-            </View>
-
-            <View style={styles.dividerHorizontal} />
-
-            <View style={styles.mainRow}>
-              <Text style={styles.labelText}>PhoneNumber</Text>
-              <Text style={[styles.infoText, { color: "#0e1130" }]}>
-                {selectedmember.CorrespondenceGSM}
-              </Text>
-            </View>
-
-            <View style={styles.dividerHorizontal} />
           </View>
         </View>
       </Container>
@@ -139,7 +196,4 @@ function mapStateToProps(state, props) {
 }
 
 //Connect everything
-export default connect(
-  mapStateToProps,
-  {}
-)(MemberItem);
+export default connect(mapStateToProps, { loadMembersList })(MemberItem);

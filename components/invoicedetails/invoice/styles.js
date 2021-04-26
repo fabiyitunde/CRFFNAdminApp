@@ -7,6 +7,45 @@ const styles = StyleSheet.create({
     width: Metrics.WIDTH,
     backgroundColor: Colors.snow
   },
+  rowBg: {
+    width: Metrics.WIDTH * 0.97,
+    alignSelf: "center",
+    backgroundColor: Colors.snow,
+    marginBottom: Metrics.WIDTH * 0.05,
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: "#ebebeb"
+  },
+
+  rowField: {
+    flexDirection: "row",
+    marginLeft: Metrics.WIDTH * 0.03,
+    marginRight: Metrics.WIDTH * 0.03,
+    marginTop: Metrics.WIDTH * 0.04,
+    marginBottom: Metrics.WIDTH * 0.04
+  },
+  fieldLabelTxt: {
+    color: "#959595",
+    fontSize: Fonts.moderateScale(15),
+    fontFamily: Fonts.type.helveticaNeueLight,
+    width: Metrics.WIDTH * 0.3,
+    textAlign: "left"
+  },
+
+  fieldDescriptionTxt: {
+    color: "#111111",
+    fontSize: Fonts.moderateScale(15),
+    fontFamily: Fonts.type.helveticaNeueLight,
+    width: Metrics.WIDTH * 0.6,
+    marginLeft: Metrics.WIDTH * 0.03,
+    textAlign: "right"
+  },
+  rowListDivider: {
+    width: Metrics.WIDTH * 0.87,
+    height: 1,
+    backgroundColor: "#E1E1E1",
+    marginLeft: Metrics.WIDTH * 0.03
+  },
 
   header: {
     // backgroundColor: "#2d324f",
@@ -242,6 +281,9 @@ const styles = StyleSheet.create({
   },
 
   detailContainer: {
+    height: Metrics.HEIGHT * 0.79
+  },
+  detailContainer2: {
     marginHorizontal: Metrics.WIDTH * 0.05,
     height: Metrics.HEIGHT * 0.79
   },
@@ -260,6 +302,19 @@ const styles = StyleSheet.create({
     fontSize: Fonts.moderateScale(15),
     textAlign: "left"
   },
+  textStylePrice: {
+    marginTop: Metrics.HEIGHT * -0.012,
+    color: Colors.snow,
+    fontWeight: "bold",
+    fontSize: Fonts.moderateScale(20),
+    textAlign: "center"
+  },
+  textStyleRef: {
+    color: Colors.snow,
+    // 	fontFamily: Fonts.type.helveticaNeueLight,
+    fontSize: Fonts.moderateScale(11),
+    textAlign: "right"
+  },
 
   textStyleBold: {
     color: Colors.lightBlack,
@@ -267,7 +322,24 @@ const styles = StyleSheet.create({
     fontSize: Fonts.moderateScale(15),
     textAlign: "left"
   },
-
+  textStyleBold2: {
+    fontWeight: "bold",
+    color: Colors.snow,
+    fontFamily: Fonts.type.helveticaRegular,
+    fontSize: Fonts.moderateScale(20),
+    textAlign: "right"
+  },
+  textStyleBold3: {
+    fontWeight: "bold",
+    color: Colors.snow,
+    fontFamily: Fonts.type.helveticaRegular,
+    fontSize: Fonts.moderateScale(14),
+    textAlign: "left"
+  },
+  headerTxt: {
+    marginLeft: Metrics.WIDTH * 0.03,
+    marginRight: Metrics.WIDTH * 0.03
+  },
   textStylePrise: {
     color: Colors.lightBlack,
     // 	fontFamily: Fonts.type.helveticaNeueLight,
@@ -277,8 +349,9 @@ const styles = StyleSheet.create({
 
   discountPrise: {
     color: Colors.red,
-    fontFamily: Fonts.type.helveticaNeueBold,
-    fontSize: Fonts.moderateScale(15)
+
+    fontSize: Fonts.moderateScale(20),
+    textAlign: "center"
   },
 
   textStyleBrand: {

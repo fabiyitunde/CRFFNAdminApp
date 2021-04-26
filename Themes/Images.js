@@ -3,6 +3,7 @@ const images = {
   activeCategory: require("../Images/activeCategory.png"),
   activeGift: require("../Images/activeGift.png"),
   listBackground: require("../Images/ListBackground.png"),
+  pricebg: require("../Images/pricebg.png"),
   listbg: require("../Images/listbg.png"),
   noavatar: require("../Images/noavatar.png"),
   invoicebg: require("../Images/invoicebg.png"),

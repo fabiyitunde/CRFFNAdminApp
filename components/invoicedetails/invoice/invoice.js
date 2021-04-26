@@ -3,61 +3,99 @@ import { Text, View, ImageBackground } from "react-native";
 
 import styles from "./styles";
 import Images from "../../../Themes/Images";
+import images from "../../../Themes/Images";
 const Invoice = ({ header, details }) => {
   return (
     <View>
       <View style={styles.detailContainer}>
-        <View>
-          <View style={styles.productDetail}>
-            <Text style={styles.textStyleBold}>{header.payername}</Text>
-            <Text style={styles.textStyle}>{header.payerphonenumber}</Text>
-            <Text style={styles.textStyle}>{header.payeremail}</Text>
-            <Text style={styles.textStyle}>{header.address}</Text>
-
-            <View style={styles.row}>
-              <Text style={styles.textStyle}>Status</Text>
-              <Text style={styles.discountPrise}> {header.status}</Text>
-            </View>
-          </View>
-
-          <View style={styles.contentSpace}>
-            <View style={styles.row}>
-              <Text style={styles.textStyle}>Category </Text>
-              <Text style={[styles.textStyleBrand, styles.textStyle]}>
-                {header.category}
+        <View style={{ width: "100%", height: "20%" }}>
+          <ImageBackground
+            source={Images.invoicebg}
+            style={{ width: "100%", height: "100%" }}
+          >
+            <View style={styles.headerTxt}>
+              <Text style={styles.textStyleBold2}>Invoice</Text>
+              <Text style={styles.textStyleBold3}>{header.payername}</Text>
+              <Text style={(styles.textStyle, { color: "white" })}>
+                {header.payeremail},
               </Text>
-            </View>
-            <View style={styles.row}>
-              <Text style={styles.textStyle}>Ref. Date </Text>
-              <Text style={[styles.textStyleBrand, styles.textStyle]}>
-                {header.refdate}
-              </Text>
-            </View>
-            <View style={styles.row}>
-              <Text style={styles.textStyle}>Invoice Amount </Text>
-              <Text style={[styles.textStyleBrand, styles.textStyle]}>
-                {header.totalinvoiceamount}
-              </Text>
-            </View>
-          </View>
 
-          <View style={styles.contentSpace}>
+              <Text style={(styles.textStyle, { color: "white" })}>
+                {header.payerphonenumber},
+              </Text>
+              <Text style={(styles.textStyle, { color: "white" })}>
+                {header.address}
+              </Text>
+              <Text style={styles.textStyleRef}>
+                Ref. Date: {header.refdate}
+              </Text>
+              <Text style={styles.textStyleRef}></Text>
+            </View>
+            <View style={styles.row}></View>
+          </ImageBackground>
+        </View>
+        <View style={styles.detailContainer}>
+          <View style={styles.rowField}>
             <Text style={styles.textStyle}>{header.narration}</Text>
           </View>
 
-          <View style={styles.contentSpace}>
+          <View style={styles.rowBg}>
             {details.map((item, index) => {
               return (
-                <View key={index} style={styles.row}>
-                  <Text style={styles.textStyle}> {item.category}</Text>
+                <View key={index}>
+                  <View style={styles.rowField}>
+                    <Text style={styles.fieldLabelTxt}> {item.category}</Text>
 
-                  <Text style={styles.textStyle}>-- {item.amount}</Text>
+                    <Text style={styles.fieldDescriptionTxt}>
+                      -- {item.amount}
+                    </Text>
+                  </View>
+                  <View style={styles.rowListDivider} />
                 </View>
               );
             })}
           </View>
+          <View>
+            <View style={styles.rowField}>
+              <Text style={styles.fieldLabelTxt}>Category </Text>
+              <Text style={[styles.fieldDescriptionTxt]}>
+                {header.category}
+              </Text>
+            </View>
+          </View>
 
-          <View style={[styles.divider, styles.contentSpace]} />
+          <View style={styles.productDetail}>
+            <View style={styles.rowField}>
+              <View style={{ width: "50%" }}>
+                <Text style={styles.fieldLabelTxt}>Status</Text>
+                <Text
+                  style={[styles.discountPrise, { backgroundColor: "#e2e2e2" }]}
+                >
+                  {header.status}
+                </Text>
+              </View>
+
+              <View style={{ width: "50%" }}>
+                <Text style={styles.textStyle}>Invoice Amount </Text>
+                <View>
+                  <ImageBackground
+                    source={Images.pricebg}
+                    style={{
+                      width: "100%",
+                      height: "70%",
+                      alignContent: "center",
+                      alignItems: "center",
+                      justifyContent: "center"
+                    }}
+                  >
+                    <Text style={[styles.textStylePrice]}>
+                      {header.totalinvoiceamount}
+                    </Text>
+                  </ImageBackground>
+                </View>
+              </View>
+            </View>
+          </View>
         </View>
       </View>
     </View>

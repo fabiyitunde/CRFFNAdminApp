@@ -1,2 +1,2 @@
-export const webapibaseurl = "http://185.122.167.222:8012";
-export const datacapturewebapibaseurl = "http://185.122.167.222:4000/";
+export const webapibaseurl = "http://18.202.236.131:6601";
+export const datacapturewebapibaseurl = "http://18.202.236.131:7601/";
